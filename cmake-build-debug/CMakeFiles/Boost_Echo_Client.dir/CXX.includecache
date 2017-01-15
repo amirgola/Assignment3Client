@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/src/./../include/connectionHandler.h
+string
+-
+iostream
+-
+boost/asio.hpp
+-
+
+/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/src/connectionHandler.cpp
+./../include/connectionHandler.h
+/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/src/./../include/connectionHandler.h
+
+/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/src/echoClient.cpp
+stdlib.h
+-
+./../include/connectionHandler.h
+/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/src/./../include/connectionHandler.h
+iostream
+-
+
