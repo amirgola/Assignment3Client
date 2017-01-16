@@ -11,3 +11,4 @@ public:
     char getDelAdd();
 };
 
+#endif

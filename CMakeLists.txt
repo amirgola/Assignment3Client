@@ -9,8 +9,22 @@ include_directories(${Boost_INCLUDE_DIRS})
 
 set(SOURCE_FILES
         include/connectionHandler.h
+        include/enums.h
+        include/MessageEncoderDecoder.h
+        include/packets/ACKpacket.h
+        include/packets/BCASTpacket.h
+        include/packets/DATApacket.h
+        include/packets/DELRQpacket.h
+        include/packets/DIRQpacket.h
+        include/packets/DISCpacket.h
+        include/packets/ERRORpacket.h
+        include/packets/LOGRQpacket.h
+        include/packets/Packet.h
+        include/packets/RRQpacket.h
+        include/packets/WRQpacket.h
         src/connectionHandler.cpp
-        src/echoClient.cpp src/ACKpacket.cpp)
+        src/echoClient.cpp
+        src/MessageEncoderDecoder.cpp)
 
 add_executable(Boost_Echo_Client ${SOURCE_FILES})
 

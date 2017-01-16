@@ -8,3 +8,5 @@ public:
     DELRQpacket(string fileName);
     string getFileName();
 };
+
+#endif
