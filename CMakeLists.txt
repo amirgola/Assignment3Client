@@ -10,7 +10,7 @@ include_directories(${Boost_INCLUDE_DIRS})
 set(SOURCE_FILES
         include/connectionHandler.h
         src/connectionHandler.cpp
-        src/echoClient.cpp)
+        src/echoClient.cpp src/ACKpacket.cpp)
 
 add_executable(Boost_Echo_Client ${SOURCE_FILES})
 

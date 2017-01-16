@@ -1,8 +1,8 @@
-# Install script for directory: /Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client
+# Install script for directory: C:/Users/Medhopz/Desktop/Study/SPL/assignment3/assignment3/client/Assignment3Client
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/usr/local")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/Boost_Echo_Client")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -35,5 +35,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/Medhopz/Desktop/Study/SPL/assignment3/assignment3/client/Assignment3Client/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

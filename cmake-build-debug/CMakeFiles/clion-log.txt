@@ -1,45 +1,45 @@
-/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client
-CMake Warning at /Applications/CLion.app/Contents/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:743 (message):
-  Imported targets not available for Boost version 106300
+"C:\Program Files (x86)\JetBrains\CLion 2016.3.2\bin\cmake\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" C:\Users\Medhopz\Desktop\Study\SPL\assignment3\assignment3\client\Assignment3Client
+CMake Warning at C:/Program Files (x86)/JetBrains/CLion 2016.3.2/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:743 (message):
+  Imported targets not available for Boost version
 Call Stack (most recent call first):
-  /Applications/CLion.app/Contents/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:842 (_Boost_COMPONENT_DEPENDENCIES)
-  /Applications/CLion.app/Contents/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:1395 (_Boost_MISSING_DEPENDENCIES)
+  C:/Program Files (x86)/JetBrains/CLion 2016.3.2/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:842 (_Boost_COMPONENT_DEPENDENCIES)
+  C:/Program Files (x86)/JetBrains/CLion 2016.3.2/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:1395 (_Boost_MISSING_DEPENDENCIES)
   CMakeLists.txt:6 (find_package)
 
 
-CMake Warning at /Applications/CLion.app/Contents/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:743 (message):
-  Imported targets not available for Boost version 106300
+CMake Warning at C:/Program Files (x86)/JetBrains/CLion 2016.3.2/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:743 (message):
+  Imported targets not available for Boost version
 Call Stack (most recent call first):
-  /Applications/CLion.app/Contents/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:842 (_Boost_COMPONENT_DEPENDENCIES)
-  /Applications/CLion.app/Contents/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:1395 (_Boost_MISSING_DEPENDENCIES)
+  C:/Program Files (x86)/JetBrains/CLion 2016.3.2/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:842 (_Boost_COMPONENT_DEPENDENCIES)
+  C:/Program Files (x86)/JetBrains/CLion 2016.3.2/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:1395 (_Boost_MISSING_DEPENDENCIES)
   CMakeLists.txt:6 (find_package)
 
 
-CMake Warning at /Applications/CLion.app/Contents/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:743 (message):
-  Imported targets not available for Boost version 106300
+CMake Warning at C:/Program Files (x86)/JetBrains/CLion 2016.3.2/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:743 (message):
+  Imported targets not available for Boost version
 Call Stack (most recent call first):
-  /Applications/CLion.app/Contents/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:842 (_Boost_COMPONENT_DEPENDENCIES)
-  /Applications/CLion.app/Contents/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:1395 (_Boost_MISSING_DEPENDENCIES)
+  C:/Program Files (x86)/JetBrains/CLion 2016.3.2/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:842 (_Boost_COMPONENT_DEPENDENCIES)
+  C:/Program Files (x86)/JetBrains/CLion 2016.3.2/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:1395 (_Boost_MISSING_DEPENDENCIES)
   CMakeLists.txt:6 (find_package)
 
 
--- Looking for pthread.h
--- Looking for pthread.h - found
--- Looking for pthread_create
--- Looking for pthread_create - found
--- Found Threads: TRUE  
--- Boost version: 1.63.0
--- Found the following Boost libraries:
---   system
---   filesystem
---   thread
--- Boost_INCLUDE_DIRS: /usr/local/include
--- Boost_LIBRARIES: /usr/local/lib/libboost_system-mt.dylib;/usr/local/lib/libboost_filesystem-mt.dylib;/usr/local/lib/libboost_thread-mt.dylib
--- Boost_VERSION: 106300
-CMake Error at CMakeLists.txt:29 (target_link_libraries):
-  Cannot specify link libraries for target "BoostTest" which is not built by
-  this project.
+CMake Error at C:/Program Files (x86)/JetBrains/CLion 2016.3.2/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:1753 (message):
+  Unable to find the requested Boost libraries.
 
+  Unable to find the Boost header files.  Please set BOOST_ROOT to the root
+  directory containing Boost or BOOST_INCLUDEDIR to the directory containing
+  Boost's headers.
+Call Stack (most recent call first):
+  CMakeLists.txt:6 (find_package)
+
+
+CMake Error: The following variables are used in this project, but they are set to NOTFOUND.
+Please set them or make sure they are set and tested correctly in the CMake files:
+Boost_INCLUDE_DIR (ADVANCED)
+   used as include directory in directory C:/Users/Medhopz/Desktop/Study/SPL/assignment3/assignment3/client/Assignment3Client
+   used as include directory in directory C:/Users/Medhopz/Desktop/Study/SPL/assignment3/assignment3/client/Assignment3Client
+   used as include directory in directory C:/Users/Medhopz/Desktop/Study/SPL/assignment3/assignment3/client/Assignment3Client
 
 -- Configuring incomplete, errors occurred!
-See also "/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/cmake-build-debug/CMakeFiles/CMakeOutput.log".
+See also "C:/Users/Medhopz/Desktop/Study/SPL/assignment3/assignment3/client/Assignment3Client/cmake-build-debug/CMakeFiles/CMakeOutput.log".
+See also "C:/Users/Medhopz/Desktop/Study/SPL/assignment3/assignment3/client/Assignment3Client/cmake-build-debug/CMakeFiles/CMakeError.log".
