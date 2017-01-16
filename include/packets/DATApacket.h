@@ -2,15 +2,16 @@
 #define DATAPACKET_H_
 
 #include <vector>
+#include "Packet.h"
 
 class DATApacket : public Packet{
 private:
     short packetSize_;
     short blockNumber_;
-    vector<char> data_;
+    std::vector<char> data_;
 public:
-    DATApacket(short packetSize, short blockNumber, vector<char> data);
-    vector<char> getData();
+    DATApacket(short packetSize, short blockNumber, std::vector<char> data);
+    std::vector<char> getData();
     short getBlockNumber();
     short getPacketSize();
 };

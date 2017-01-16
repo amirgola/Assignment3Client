@@ -1,12 +1,14 @@
 #ifndef WRQPACKET_H_
 #define WRQPACKET_H_
 
+#include "Packet.h"
+
 class WRQpacket : public Packet{
 private:
-    string fileName_;
+    std::string fileName_;
 public:
-    WRQpacket(string fileName);
-    string getFileName();
+    WRQpacket(std::string fileName);
+    std::string getFileName();
 };
 
 #endif

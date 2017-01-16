@@ -1,14 +1,16 @@
 #ifndef ERRORPACKET_H_
 #define ERRORPACKET_H_
 
+#include "Packet.h"
+
 class ERRORpacket : public Packet{
 private:
     short errCode;
-    string errMsg;
+    std::string errMsg;
 public:
-    ERRORpacket(short errCode, string errMsg);
+    ERRORpacket(short errCode, std::string errMsg);
     short getErrCode();
-    string getErrMsg();
+    std::string getErrMsg();
 };
 
 #endif

@@ -1,12 +1,14 @@
 #ifndef LOGRQPACKET_H_
 #define LOGRQPACKET_H_
 
+#include "Packet.h"
+
 class LOGRQpacket : public Packet{
 private:
-    string userName_;
+    std::string userName_;
 public:
-    LOGRQpacket(string userName);
-    string getUserName();
+    LOGRQpacket(std::string userName);
+    std::string getUserName();
 };
 
 #endif

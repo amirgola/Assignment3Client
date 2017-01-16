@@ -1,12 +1,14 @@
 #ifndef DELRQPACKET_H_
 #define DELRQPACKET_H_
 
+#include "Packet.h"
+
 class DELRQpacket : public Packet{
 private:
-    string fileName_;
+    std::string fileName_;
 public:
-    DELRQpacket(string fileName);
-    string getFileName();
+    DELRQpacket(std::string fileName);
+    std::string getFileName();
 };
 
 #endif
