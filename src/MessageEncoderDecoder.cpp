@@ -2,7 +2,9 @@
 #include "./../include/MessageEncoderDecoder.h"
 #include "./../include/enums.h"
 #include "./../include/Packets/Packet.h"
-
+#include "../include/packets/RRQpacket.h"
+#include "../include/packets/WRQpacket.h"
+#include "../include/packets/DATApacket.h"
 
 
 Packet MessageEncoderDecoder::decodeNextByte(char nextByte){
@@ -12,22 +14,41 @@ Packet MessageEncoderDecoder::decodeNextByte(char nextByte){
     } else {
         switch(opCode) {
             case enumNamespace::PacketType::RRQ :
-//                if(nextByte != '\0') {
-//                    buffer.
-//                } else {
-//                    try {
-//                        strBuffer = new String(buffer.array(), "UTF-8");
-//                        resetBuffer();
-//                        return new RRQpacket(strBuffer);
-//                    } catch (UnsupportedEncodingException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//                break;
+                if(nextByte != '\0') {
+                    buffer.push_back(nextByte);
+                } else {
+                    strBuffer = std::string(buffer.begin(), buffer.end());
+                    resetBuffer();
+                    return RRQpacket(strBuffer);
+                }
                 break;
             case enumNamespace::PacketType::WRQ:
+                if(nextByte != '\0') {
+                    buffer.push_back(nextByte);
+                } else {
+                    strBuffer = std::string(buffer.begin(), buffer.end());
+                    resetBuffer();
+                    return WRQpacket(strBuffer);
+                }
                 break;
             case enumNamespace::PacketType::DATA:
+                if(buffer.size() < 4) { // 0,1,2,3 position get filled in buffer
+                    buffer.push_back(nextByte);
+                    if (buffer.size() == 2) {
+                        pckSize = bytesToShort(buffer);
+                        dataArr = new std::vector<char>();
+                    }
+                    if (buffer.size() == 4) {
+                        std::vector<char> newVector(buffer.begin()+2,buffer.end());
+                        blkNum = bytesToShort(newVector);
+                    }
+                } else {
+                    dataArr->push_back(nextByte);
+                    if (dataArr->size() == pckSize) {
+                        resetBuffer();
+                        return DATApacket(pckSize, blkNum, *dataArr);
+                    }
+                }
                 break;
             case enumNamespace::PacketType::ACK:
                 break;
@@ -89,7 +110,13 @@ std::vector<char> MessageEncoderDecoder::encode(Packet message){
     }
 
     void MessageEncoderDecoder::resetBuffer(){
-
+        finishFirstTwoBytes = false;
+        buffer.clear();
+        firstTime = true;
+        //reset the opcode array
+        opCodeLen = 0;
+        opCodeBytes[0] = 0;
+        opCodeBytes[1] = 0;
     }
 
     void MessageEncoderDecoder::findOpCode(char nextByte){

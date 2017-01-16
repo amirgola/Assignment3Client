@@ -15,14 +15,14 @@ private:
     int opCodeLen;
     int len;
     std::string msgType;
-    std::string str;
+    std::string strBuffer;
     bool finishFirstTwoBytes;
     std::vector<char> buffer;
     bool firstTime;
     //for data packet
     short pckSize;
     short blkNum;
-    std::vector<char> dataArr;
+    std::vector<char> *dataArr;
     int dataIndex;
 
     std::vector<char> shortToBytes(short num);
