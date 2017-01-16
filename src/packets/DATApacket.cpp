@@ -1,16 +1,16 @@
-#include "./../include/DATApacket.h"
+#include "./../../include/packets/DATApacket.h"
 
 //
 // Created by Medhopz on 1/16/2017.
 //
 
-DATApacket::DATApacket(short packetSize, short blockNumber, vector<char> data) {
+DATApacket::DATApacket(short packetSize, short blockNumber, std::vector<char> data) {
     packetSize_ = packetSize;
     blockNumber_ = blockNumber;
     data_ = data;
 }
 
-vector<char> DATApacket::getData() {
+std::vector<char> DATApacket::getData() {
     return data_;
 }
 

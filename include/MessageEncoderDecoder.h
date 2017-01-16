@@ -10,31 +10,24 @@
 class MessageEncoderDecoder {
 private:
     short opCode;
-    std::vector<char> bytes;
     std::vector<char> opCodeBytes;
     int opCodeLen;
-    int len;
-    std::string msgType;
     std::string strBuffer;
-    bool finishFirstTwoBytes;
     std::vector<char> buffer;
-    bool firstTime;
     //for data packet
     short pckSize;
     short blkNum;
     std::vector<char> *dataArr;
-    int dataIndex;
+    short errCode;
 
-    std::vector<char> shortToBytes(short num);
+    void shortToBytes(short num, char* bytesArr);
     short bytesToShort(std::vector<char> byteArr);
-    std::string whichMsg(short i);
     void resetBuffer();
     void findOpCode(char nextByte);
-    std::vector<char> bufferToByteArray();
 
 public:
     Packet decodeNextByte(char nextByte);
-    std::vector<char> encode(Packet message);
+    std::vector<char> encode(Packet* message);
     ~MessageEncoderDecoder();
 };
 

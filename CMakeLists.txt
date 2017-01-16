@@ -22,6 +22,17 @@ set(SOURCE_FILES
         include/packets/Packet.h
         include/packets/RRQpacket.h
         include/packets/WRQpacket.h
+        src/packets/ACKpacket.cpp
+        src/packets/BCASTpacket.cpp
+        src/packets/DATApacket.cpp
+        src/packets/DELRQpacket.cpp
+        src/packets/DIRQpacket.cpp
+        src/packets/DISCpacket.cpp
+        src/packets/ERRORpacket.cpp
+        src/packets/LOGRQpacket.cpp
+        src/packets/Packet.cpp
+        src/packets/RRQpacket.cpp
+        src/packets/WRQpacket.cpp
         src/connectionHandler.cpp
         src/echoClient.cpp
         src/MessageEncoderDecoder.cpp)

@@ -8,8 +8,8 @@ private:
     std::string filename_;
     char delAdd_;
 public:
-    BCASTpacket(char delAdd, string fileName);
-    std::string getFilname();
+    BCASTpacket(char delAdd, std::string fileName);
+    std::string getFileName();
     char getDelAdd();
 };
 

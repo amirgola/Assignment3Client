@@ -1,13 +1,13 @@
-#include "./../include/LOGRQpacket.h"
+#include "./../../include/packets/LOGRQpacket.h"
 
 //
 // Created by Medhopz on 1/16/2017.
 //
 
-LOGRQpacket::LOGRQpacket(string userName) {
+LOGRQpacket::LOGRQpacket(std::string userName) {
     userName_ = userName;
 }
 
-string LOGRQpacket::getUserName() {
+std::string LOGRQpacket::getUserName() {
     return userName_;
 }

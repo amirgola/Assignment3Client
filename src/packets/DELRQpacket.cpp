@@ -1,13 +1,13 @@
-#include "./../include/DELRQpacket.h"
+#include "./../../include/packets/DELRQpacket.h"
 
 //
 // Created by Medhopz on 1/16/2017.
 //
 
-DELRQpacket::DELRQpacket(string fileName) {
+DELRQpacket::DELRQpacket(std::string fileName) {
     fileName_ = fileName;
 }
 
-string DELRQpacket::getFileName() {
+std::string DELRQpacket::getFileName() {
     return fileName_;
 }

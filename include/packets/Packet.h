@@ -11,6 +11,7 @@ private:
     std::string msgType;
 public:
     Packet();
+    Packet(const Packet& other);
     short getOpCode();
     std::string getMsgType();
     virtual ~Packet();
