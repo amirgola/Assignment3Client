@@ -1,6 +1,8 @@
 #ifndef MessageEncoderDecoder_H_
 #define MessageEncoderDecoder_H_
 
+#include <./packets/Packet.h>
+
 class MessageEncoderDecoder {
 private:
     short opCode;
