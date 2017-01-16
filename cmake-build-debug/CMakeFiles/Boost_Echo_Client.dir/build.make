@@ -116,6 +116,9 @@ Boost_Echo_Client_EXTERNAL_OBJECTS =
 Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/src/connectionHandler.cpp.o
 Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.o
 Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/build.make
+Boost_Echo_Client: /usr/local/lib/libboost_system-mt.dylib
+Boost_Echo_Client: /usr/local/lib/libboost_filesystem-mt.dylib
+Boost_Echo_Client: /usr/local/lib/libboost_thread-mt.dylib
 Boost_Echo_Client: CMakeFiles/Boost_Echo_Client.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable Boost_Echo_Client"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Boost_Echo_Client.dir/link.txt --verbose=$(VERBOSE)
