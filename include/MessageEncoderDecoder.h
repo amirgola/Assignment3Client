@@ -17,7 +17,7 @@ private:
     std::string msgType;
     std::string str;
     bool finishFirstTwoBytes;
-    std::stringbuf buffer;
+    std::vector<char> buffer;
     bool firstTime;
     //for data packet
     short pckSize;
@@ -34,8 +34,8 @@ private:
 
 public:
     Packet decodeNextByte(char nextByte);
-
     std::vector<char> encode(Packet message);
+    ~MessageEncoderDecoder();
 };
 
 #endif
