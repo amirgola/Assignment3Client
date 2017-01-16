@@ -10,12 +10,12 @@ Packet MessageEncoderDecoder::decodeNextByte(char nextByte){
     if(opCode == 0) {
 
     } else {
-//        switch(opCode) {
-//            case enumNamespace::PacketType::RRQ :
-//                break;       // and exits the switch
-//            case enumNamespace::PacketType::WRQ:
-//                break;
-//        }
+        switch(opCode) {
+            case enumNamespace::PacketType::RRQ :
+                break;       // and exits the switch
+            case enumNamespace::PacketType::WRQ:
+                break;
+        }
     }
 }
 
