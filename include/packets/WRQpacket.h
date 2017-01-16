@@ -8,3 +8,5 @@ public:
     WRQpacket(string fileName);
     string getFileName();
 };
+
+#endif

@@ -1,6 +1,8 @@
 #ifndef DATAPACKET_H_
 #define DATAPACKET_H_
 
+#include <vector>
+
 class DATApacket : public Packet{
 private:
     short packetSize_;
@@ -12,3 +14,5 @@ public:
     short getBlockNumber();
     short getPacketSize();
 };
+
+#endif

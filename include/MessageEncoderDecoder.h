@@ -1,35 +1,41 @@
 #ifndef MessageEncoderDecoder_H_
 #define MessageEncoderDecoder_H_
 
-#include <./packets/Packet.h>
+#include "./packets/Packet.h"
+#include <vector>
+#include <string>
+#include <sstream>
+#include <iostream>
 
 class MessageEncoderDecoder {
 private:
     short opCode;
-    vector<char> bytes;
-    vector<char> opCodeBytes;
+    std::vector<char> bytes;
+    std::vector<char> opCodeBytes;
     int opCodeLen;
     int len;
-    String msgType;
-    String str;
-    boolean finishFirstTwoBytes;
-    ByteBuffer buffer;
-    boolean firstTime;
+    std::string msgType;
+    std::string str;
+    bool finishFirstTwoBytes;
+    std::stringbuf buffer;
+    bool firstTime;
     //for data packet
     short pckSize;
     short blkNum;
-    vector<char> dataArr;
+    std::vector<char> dataArr;
     int dataIndex;
 
-    vector<char> shortToBytes(short num);
-    short bytesToShort(vector<char> byteArr);
-    string whichMsg(short i);
+    std::vector<char> shortToBytes(short num);
+    short bytesToShort(std::vector<char> byteArr);
+    std::string whichMsg(short i);
     void resetBuffer();
-    void findOpCode(byte nextByte);
-    vector<char> bufferToByteArray();
+    void findOpCode(char nextByte);
+    std::vector<char> bufferToByteArray();
 
 public:
     Packet decodeNextByte(char nextByte);
 
-    vector<char> encode(Packet message);
+    std::vector<char> encode(Packet message);
 };
+
+#endif

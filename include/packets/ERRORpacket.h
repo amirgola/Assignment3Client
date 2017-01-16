@@ -10,3 +10,5 @@ public:
     short getErrCode();
     string getErrMsg();
 };
+
+#endif

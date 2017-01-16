@@ -8,3 +8,5 @@ public:
     LOGRQpacket(string userName);
     string getUserName();
 };
+
+#endif

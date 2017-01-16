@@ -5,3 +5,6 @@ class DIRQpacket : public Packet{
 public:
     DIRQpacket();
 };
+
+
+#endif

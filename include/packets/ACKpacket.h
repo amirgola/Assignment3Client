@@ -8,3 +8,5 @@ public:
     ACKpacket(short i);
     short getBlockNumber();
 };
+
+#endif

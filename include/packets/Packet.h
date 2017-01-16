@@ -1,13 +1,19 @@
-#ifndef ACKPACKET_H_
-#define ACKPACKET_H_
+#ifndef PACKET_H_
+#define PACKET_H_
+
+#include <string>
+#include <sstream>
+#include <iostream>
 
 class Packet{
 private:
     short opCode_;
-    string msgType;
+    std::string msgType;
 public:
     Packet();
     short getOpCode();
-    string getMsgType();
+    std::string getMsgType();
     virtual ~Packet();
 };
+
+#endif

@@ -5,3 +5,5 @@ class DISCpacket : public Packet{
 public:
     DISCpacket();
 };
+
+#endif
