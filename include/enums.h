@@ -1,6 +1,6 @@
 namespace enumNamespace{
     enum PacketType {
-        RRQ =1,
+        RRQ = 1,
         WRQ,
         DATA,
         ACK,
@@ -12,4 +12,6 @@ namespace enumNamespace{
         DISC,
         UNKNOWN
     };
+
+    extern enumNamespace::PacketType g_status;
 }
