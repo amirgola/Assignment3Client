@@ -7,6 +7,8 @@
 #include <boost/thread.hpp>
 #include "../include/packets/Packet.h"
 #include "./../include/Protocol.h"
+#include "./../include/enums.h"
+#include "./../include/packets/ERRORpacket.h"
 
 SocketTask::SocketTask(int* pendingTasks, boost::mutex* mutex,
                        Protocol* protocol)
@@ -23,23 +25,16 @@ void SocketTask::operator()(){
         std::string answer;
         // Get back an answer: by using the expected number of bytes (len bytes + newline delimiter)
         // We could also use: connectionHandler.getline(answer) and then get the answer without the newline char at the end
-
-        // decode
-        // call protocol
-
-        int len=answer.length();
-        // A C string must end with a 0 char delimiter.  When we filled the answer buffer from the socket
-        // we filled up to the \n char - we must make sure now that a 0 char is also present. So we truncate last character.
-        answer.resize(len-1);
-
-        // convert to packet
-        // put the packet to incoming messages (using lock)
-
-        // show incoming message
-        std::cout << "Reply: " << answer << " " << len << " bytes " << std::endl << std::endl;
-        if (answer == "bye") {
-            std::cout << "Exiting...\n" << std::endl;
+        if(!_protocol->getConnectionHandler()->getLine(answer)){
             break;
+        }
+        // decode
+        MessageEncoderDecoder encDec = MessageEncoderDecoder();
+        for(char& c : answer) {
+            Packet packet = encDec.decodeNextByte(c);
+            if(packet.getOpCode() != enumNamespace::PacketType::ERROR || ((ERRORpacket*)&packet)->getErrCode() != 999){
+                _protocol->process(&packet);
+            }
         }
     }
 

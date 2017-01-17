@@ -35,6 +35,7 @@ public:
     void AckProcess(Packet* message);
     void sendData();
     void sendPacket(Packet* packet);
+    ConnectionHandler* getConnectionHandler();
     ~Protocol();
 };
 

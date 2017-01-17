@@ -1,7 +1,7 @@
 #include <vector>
 #include "./../include/Protocol.h"
 #include "./../include/enums.h"
-#include "./../include/Packets/Packet.h"
+#include "./../include/packets/Packet.h"
 #include "../include/packets/ERRORpacket.h"
 #include "../include/packets/ACKpacket.h"
 #include "../include/packets/RRQpacket.h"
@@ -157,6 +157,10 @@ std::vector<char> Protocol::readFileBytes(char const *filename) {
     ifs.read(&result[0], pos);
 
     return result;
+}
+
+ConnectionHandler* Protocol::getConnectionHandler(){
+    return _connectionHandler;
 }
 
 Protocol::~Protocol(){

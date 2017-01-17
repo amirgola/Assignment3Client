@@ -1,8 +1,9 @@
 //
 // Created by Stephanie Schustermann on 17/01/2017.
 //
-
+#include <stdlib.h>
 #include "../include/KeyboardTask.h"
+#include <string>
 #include <iostream>
 #include <boost/thread.hpp>
 #include "../include/packets/Packet.h"
@@ -26,19 +27,27 @@ KeyboardTask::KeyboardTask(int* pendingTasks, boost::mutex* mutex,
 void KeyboardTask::operator()(){
     while(true){ //while connected? use lock?
         // get input
-        const short bufsize = 1024;
+        const short bufsize = 512;
         char buf[bufsize];
-        std::cin.getline(buf, bufsize);
-        std::string line(buf);
-        int len=line.length();
+        //std::cin.getline(buf, bufsize);
+//        std::string line(buf);
+//        int len=line.length();
+        std::cout << "Sent bytes to server" << std::endl;
+        std::string mystr;
+        std::cout << "Sent " << " bytes to server" << std::endl;
+        std::getline (std::cin, mystr);
 
-        Packet sendPacket = keyboardParsing(line);
-
-        _protocol->process(&sendPacket);
+        Packet sendPacket = keyboardParsing(mystr);
+        MessageEncoderDecoder encDec = MessageEncoderDecoder();
+        std::vector<char> encodedMessage = encDec.encode(&sendPacket);
+        std::string toSend(encodedMessage.begin(), encodedMessage.end());
+        if(!_protocol->getConnectionHandler()->sendLine(toSend)){
+            break;
+        }
 
 
         // connectionHandler.sendLine(line) appends '\n' to the message. Therefor we send len+1 bytes.
-        std::cout << "Sent " << len+1 << " bytes to server" << std::endl;
+        std::cout << "Sent " << 90 << " bytes to server" << std::endl;
     }
 
     boost::this_thread::yield(); //Gives up the remainder of the current thread's time slice, to allow other threads to run.
@@ -49,12 +58,12 @@ void KeyboardTask::operator()(){
 //
 
 Packet KeyboardTask::keyboardParsing (std::string str) {
-    std::size_t found = str.find_first_of(" ");
-    std::string command = str.substr(0, found);
-    std::string fileName = str.substr(found);
+    std::size_t found = str.find_first_of(' ');
+    std::string fileName = str.substr(static_cast<int>(found)+1);
+    std::string command = str.substr(0, static_cast<int>(found));
 
     if(command == "DIRQ") {
-            enumNamespace::g_status = enumNamespace::PacketType::DIRQ;
+        enumNamespace::g_status = enumNamespace::PacketType::DIRQ;
         return DIRQpacket();
     }
     if(command =="DELRQ") {

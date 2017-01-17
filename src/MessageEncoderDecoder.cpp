@@ -129,7 +129,7 @@ Packet MessageEncoderDecoder::decodeNextByte(char nextByte) {
         }
     }
 
-    return ERRORpacket(4, "unknown OP code");
+    return ERRORpacket(999, "unknown OP code");
 }
 
 
