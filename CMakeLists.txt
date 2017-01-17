@@ -22,6 +22,7 @@ set(SOURCE_FILES
         include/packets/Packet.h
         include/packets/RRQpacket.h
         include/packets/WRQpacket.h
+        include/concurrent_queue.h
         src/packets/ACKpacket.cpp
         src/packets/BCASTpacket.cpp
         src/packets/DATApacket.cpp
@@ -33,6 +34,7 @@ set(SOURCE_FILES
         src/packets/Packet.cpp
         src/packets/RRQpacket.cpp
         src/packets/WRQpacket.cpp
+        src/concurrent_queue.cpp
         src/connectionHandler.cpp
         src/echoClient.cpp
         src/MessageEncoderDecoder.cpp)
