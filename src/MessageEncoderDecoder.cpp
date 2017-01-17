@@ -277,3 +277,7 @@ void MessageEncoderDecoder::findOpCode(char nextByte) {
         opCode = bytesToShort(opCodeBytes);
     }
 }
+
+MessageEncoderDecoder::~MessageEncoderDecoder(){
+
+}

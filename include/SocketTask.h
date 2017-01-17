@@ -4,20 +4,16 @@
 
 #ifndef BOOST_ECHO_CLIENT_SOCKETTASK_H
 #define BOOST_ECHO_CLIENT_SOCKETTASK_H
-#include "concurrent_queue.h"
-#include "./packets/Packet.h"
-#include "connectionHandler.h"
+#include "Protocol.h"
+#include <boost/thread.hpp>
 
 class SocketTask {
 private:
     int* _pendingTasks;
-    concurrent_queue<Packet>* _outgoingMessages;
-    concurrent_queue<Packet>* _incomingMessages;
     boost::mutex * _mutex;
-    ConnectionHandler* _connectionHandler;
+    Protocol* _protocol;
 public:
-    SocketTask(int* pendingTasks, concurrent_queue<Packet>* outgoingMessages,
-               concurrent_queue<Packet>* incomingMessages, boost::mutex* mutex, ConnectionHandler* connectionHandler);
+    SocketTask(int* pendingTasks, boost::mutex* mutex, Protocol* protocol);
     void operator()();
 };
 

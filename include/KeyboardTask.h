@@ -4,21 +4,18 @@
 
 #ifndef BOOST_ECHO_CLIENT_KEYBOARDTASK_H
 #define BOOST_ECHO_CLIENT_KEYBOARDTASK_H
-#include "concurrent_queue.h"
-#include "./packets/Packet.h"
-#include "connectionHandler.h"
+#include "Protocol.h"
+#include <boost/thread.hpp>
 
 class KeyboardTask {
 private:
     int* _pendingTasks;
-    concurrent_queue<Packet>* _outgoingMessages;
-    concurrent_queue<Packet>* _incomingMessages;
     boost::mutex * _mutex;
-    ConnectionHandler* _connectionHandler;
+    Protocol* _protocol;
 public:
-    KeyboardTask(int* pendingTasks, concurrent_queue<Packet>* outgoingMessages,
-                 concurrent_queue<Packet>* incomingMessages, boost::mutex* mutex, ConnectionHandler* connectionHandler);
+    KeyboardTask(int* pendingTasks, boost::mutex* mutex, Protocol* protocol);
     void operator()();
+    Packet keyboardParsing (std::string str);
 };
 
 #endif //BOOST_ECHO_CLIENT_KEYBOARDTASK_H

@@ -9,32 +9,22 @@
 #include "../include/packets/DELRQpacket.h"
 #include "../include/packets/BCASTpacket.h"
 #include "../include/packets/DATApacket.h"
+#include "./../include/MessageEncoderDecoder.h"
 
 #include <iostream>
 #include <fstream>
 #include <math.h>
 
-Protocol::Protocol(concurrent_queue<Packet>* outgoingMessages): sendList(outgoingMessages){}
+Protocol::Protocol(ConnectionHandler* connectionHandler): _connectionHandler(connectionHandler){
+    encDec = MessageEncoderDecoder();
+}
 
 void Protocol::process(Packet* message) {
     short opCode = message->getOpCode();
     switch(opCode) {
         case enumNamespace::PacketType::ACK:
-            if(enumNamespace::g_status == enumNamespace::PacketType::WRQ) {
-                if( lastPckSent == ((ACKpacket *) message)->getBlockNumber() ) {
-                    if (sendDataArr->size() != 0) {
-                        lastPckSent = sendDataArr->back().getBlockNumber();
-                        sendList->push(sendDataArr->front());
-                        sendDataArr->erase(sendDataArr->begin());
-                    } else {
-                        std::cout << "WRQ " << fileUploadName << " complete" << std::endl;
-                        enumNamespace::g_status = enumNamespace::PacketType::WAITING;
-                    }
-                }
-            } else if(enumNamespace::g_status == enumNamespace::PacketType::DISC) {
-                enumNamespace::g_status = enumNamespace::PacketType::WAITING;
-                //disconnect(); // do we need to send another ACK or is this ok?
-            }
+            // call ack process
+            AckProcess(message);
             std::cout << "ACK <" << ((ACKpacket *) message)->getBlockNumber() << ">" << std::endl;
             break;
 
@@ -51,7 +41,11 @@ void Protocol::process(Packet* message) {
                 for (int i = 0; i < ((DATApacket*)message)->getData().size(); ++i) {
                     downloadArr->push_back((char &&) ((DATApacket*)message)->getData().at(i));
                 }
-                sendList->push( ACKpacket( ((DATApacket*)message)->getBlockNumber()));
+
+                ACKpacket* acKpacket = new ACKpacket( ((DATApacket*)message)->getBlockNumber());
+                sendPacket(acKpacket);
+                delete acKpacket;
+
                 if(((DATApacket*)message)->getData().size() < 512) {
                     enumNamespace::g_status = enumNamespace::PacketType::WAITING;
                     std::cout << "RRQ <" << fileDownloadName << ">" << " complete" << std::endl;
@@ -61,7 +55,11 @@ void Protocol::process(Packet* message) {
                 for (int i = 0; i < ((DATApacket*)message)->getData().size(); ++i) {
                     dirqArr->push_back((char &&) ((DATApacket*)message)->getData().at(i));
                 }
-                    sendList->push( ACKpacket( ((DATApacket*)message)->getBlockNumber()));
+
+                ACKpacket* acKpacket = new ACKpacket( ((DATApacket*)message)->getBlockNumber());
+                sendPacket(acKpacket);
+                delete acKpacket;
+
                 if(((DATApacket*)message)->getData().size() < 512) { // we can assume we get the packets in the right order
                     finishDownload = true;
                     enumNamespace::g_status = enumNamespace::PacketType::WAITING;
@@ -70,11 +68,56 @@ void Protocol::process(Packet* message) {
                 }
             }
             break;
+    }
+}
 
+void Protocol::AckProcess(Packet* message){
+    switch(enumNamespace::g_status){
+        case enumNamespace::PacketType::WRQ:{
+            // split
+            const char *cstr = enumNamespace::g_fileNameString.c_str();
+            splitFileIntoDataPackets(cstr);
+            // send first
+            sendData();
+            enumNamespace::g_status = enumNamespace::PacketType::DATA;
+            break;
+        }
+        case enumNamespace::PacketType::DATA:{
+           // send next data
+            if( lastPckSent == ((ACKpacket *)message)->getBlockNumber() ) {
+                sendData();
+            }
+        }
+        case enumNamespace::PacketType::DISC:{
+            // close socket
+            enumNamespace::g_status = enumNamespace::PacketType::WAITING;
+        }
+        default:
+            break;
     }
 
+}
 
+void Protocol::sendData(){
+    if (sendDataArr->size() != 0) {
+        lastPckSent = sendDataArr->front()->getBlockNumber();
 
+        // encode the packet
+        sendPacket(sendDataArr->front());
+
+        sendDataArr->erase(sendDataArr->begin());
+    } else {
+        std::cout << "WRQ " << fileUploadName << " complete" << std::endl;
+        enumNamespace::g_status = enumNamespace::PacketType::WAITING;
+    }
+}
+
+void Protocol::sendPacket(Packet* packet){
+    std::vector<char> encodedMessage = encDec.encode(packet);
+    std::string toSend(encodedMessage.begin(), encodedMessage.end());
+    if (!_connectionHandler->sendLine(toSend)) {
+        std::cout << "Disconnected. Exiting...\n" << std::endl;
+    }
 }
 
 void Protocol::printDirq(std::vector<char> arr) {
@@ -87,7 +130,6 @@ void Protocol::printDirq(std::vector<char> arr) {
     }
 }
 
-
 void Protocol::splitFileIntoDataPackets(const char* fileName) {
     std::vector<char> a = readFileBytes(fileName);
     int blkNum = 1;
@@ -96,17 +138,16 @@ void Protocol::splitFileIntoDataPackets(const char* fileName) {
         if(te.size() <= 512) {
             te.push_back((char &&) a.at(j));
         } else {
-            sendDataArr->push_back(DATApacket(te.size(), blkNum, te));
+            sendDataArr->push_back(new DATApacket(te.size(), blkNum, te));
             te.clear();
             blkNum++;
         }
     }
-    sendDataArr->push_back(DATApacket(te.size(), blkNum, te)); // add the last packet with size < 512
+    sendDataArr->push_back(new DATApacket(te.size(), blkNum, te)); // add the last packet with size < 512
 
 }
 
-std::vector<char> Protocol::readFileBytes(char const *filename)
-{
+std::vector<char> Protocol::readFileBytes(char const *filename) {
     std::ifstream ifs(filename, std::ios::binary|std::ios::ate);
     std::ifstream::pos_type pos = ifs.tellg();
 
@@ -116,4 +157,8 @@ std::vector<char> Protocol::readFileBytes(char const *filename)
     ifs.read(&result[0], pos);
 
     return result;
+}
+
+Protocol::~Protocol(){
+
 }

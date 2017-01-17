@@ -13,6 +13,7 @@ namespace enumNamespace{
         UNKNOWN,
         WAITING
     };
-
     extern enumNamespace::PacketType g_status;
+    extern std::string g_fileNameString;
 }
+

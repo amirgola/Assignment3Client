@@ -5,15 +5,12 @@
 #include "../include/SocketTask.h"
 #include <iostream>
 #include <boost/thread.hpp>
-#include "./../include/concurrent_queue.h"
 #include "../include/packets/Packet.h"
-#include "./../include/connectionHandler.h"
+#include "./../include/Protocol.h"
 
-SocketTask::SocketTask(int* pendingTasks, concurrent_queue<Packet>* outgoingMessages,
-                       concurrent_queue<Packet>* incomingMessages, boost::mutex* mutex,
-                       ConnectionHandler* connectionHandler)
-        : _pendingTasks(pendingTasks), _outgoingMessages(outgoingMessages), _incomingMessages(incomingMessages),
-          _mutex(mutex), _connectionHandler(connectionHandler){}
+SocketTask::SocketTask(int* pendingTasks, boost::mutex* mutex,
+                       Protocol* protocol)
+        : _pendingTasks(pendingTasks), _mutex(mutex), _protocol(protocol){}
 
 void SocketTask::operator()(){
     while(true){ //while connected? use lock?
@@ -26,10 +23,9 @@ void SocketTask::operator()(){
         std::string answer;
         // Get back an answer: by using the expected number of bytes (len bytes + newline delimiter)
         // We could also use: connectionHandler.getline(answer) and then get the answer without the newline char at the end
-        if (!_connectionHandler->getLine(answer)) {
-            std::cout << "Disconnected. Exiting...\n" << std::endl;
-            break;
-        }
+
+        // decode
+        // call protocol
 
         int len=answer.length();
         // A C string must end with a 0 char delimiter.  When we filled the answer buffer from the socket

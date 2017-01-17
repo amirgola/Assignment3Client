@@ -6,7 +6,8 @@
 #define BOOST_ECHO_CLIENT_PROTOCOL_H
 
 #include "./packets/DATApacket.h"
-#include "./../include/concurrent_queue.h"
+#include "./../include/MessageEncoderDecoder.h"
+#include "./../include/connectionHandler.h"
 
 class Protocol {
 private:
@@ -15,21 +16,25 @@ private:
     short blkNum;
     std::vector<char> *downloadArr;
     std::vector<char> *dirqArr;
-    std::vector<DATApacket> *sendDataArr;
+    std::vector<DATApacket*> *sendDataArr;
 
     std::vector<char> readFileBytes(const char *name);
     bool finishDownload;
     std::string fileDownloadName;
     std:: string fileUploadName;
     int lastPckSent;
-    concurrent_queue<Packet>* sendList;
+
+    ConnectionHandler* _connectionHandler;
+    MessageEncoderDecoder encDec;
 
 public:
-    Protocol(concurrent_queue<Packet>* outgoingMessages);
     void process(Packet* message);
     void splitFileIntoDataPackets(const char* fileName);
-
     void printDirq( std::vector<char> dirqArr);
+    Protocol(ConnectionHandler* connectionHandler);
+    void AckProcess(Packet* message);
+    void sendData();
+    void sendPacket(Packet* packet);
     ~Protocol();
 };
 

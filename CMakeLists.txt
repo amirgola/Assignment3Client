@@ -22,7 +22,6 @@ set(SOURCE_FILES
         include/packets/Packet.h
         include/packets/RRQpacket.h
         include/packets/WRQpacket.h
-        include/concurrent_queue.h
         include/KeyboardTask.h
         include/SocketTask.h
         include/Protocol.h
@@ -37,7 +36,6 @@ set(SOURCE_FILES
         src/packets/Packet.cpp
         src/packets/RRQpacket.cpp
         src/packets/WRQpacket.cpp
-        src/concurrent_queue.cpp
         src/Protocol.cpp
         src/connectionHandler.cpp
         src/KeyboardTask.cpp

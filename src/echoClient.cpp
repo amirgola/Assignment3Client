@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include "./../include/connectionHandler.h"
 #include <iostream>
-#include "./../include/concurrent_queue.h"
 #include "../include/packets/Packet.h"
 #include "./../include/KeyboardTask.h"
 #include "./../include/SocketTask.h"
@@ -10,6 +9,8 @@
 /**
 * This code assumes that the server replies the exact text the client sent it (as opposed to the practical session example)
 */
+enumNamespace::PacketType enumNamespace::g_status;
+std::string enumNamespace::g_fileNameString;
 
 int main (int argc, char *argv[]) {
     if (argc < 3) {
@@ -24,14 +25,12 @@ int main (int argc, char *argv[]) {
         std::cerr << "Cannot connect to " << host << ":" << port << std::endl;
         return 1;
     }
-
-    concurrent_queue<Packet>* outgoingQueue = new concurrent_queue<Packet>();
-    concurrent_queue<Packet>* incomingQueue = new concurrent_queue<Packet>(); // maybe is not necessary
+    Protocol protocol(&connectionHandler);
     int pendingAcks = 0;
     boost::mutex mutex;
 
-    KeyboardTask keyboardTask(&pendingAcks, outgoingQueue, incomingQueue, &mutex, &connectionHandler);
-    SocketTask socketTask(&pendingAcks, outgoingQueue, incomingQueue, &mutex, &connectionHandler);
+    KeyboardTask keyboardTask(&pendingAcks, &mutex, &protocol);
+    SocketTask socketTask(&pendingAcks, &mutex, &protocol);
 
     boost::thread th1(keyboardTask);
     boost::thread th2(socketTask);
