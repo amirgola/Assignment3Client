@@ -10,7 +10,8 @@ namespace enumNamespace{
         DELRQ,
         BCAST,
         DISC,
-        UNKNOWN
+        UNKNOWN,
+        WAITING
     };
 
     extern enumNamespace::PacketType g_status;

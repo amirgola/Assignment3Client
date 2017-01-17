@@ -24,15 +24,15 @@ void Protocol::process(Packet* message) {
                 if( lastPckSent == ((ACKpacket *) message)->getBlockNumber() ) {
                     if (sendDataArr->size() != 0) {
                         lastPckSent = sendDataArr->back().getBlockNumber();
-                        sendList->push(sendDataArr->front()); // do we need to pop front?
+                        sendList->push(sendDataArr->front());
                         sendDataArr->erase(sendDataArr->begin());
                     } else {
                         std::cout << "WRQ " << fileUploadName << " complete" << std::endl;
-                        status = "null";
+                        enumNamespace::g_status = enumNamespace::PacketType::WAITING;
                     }
                 }
-            } else if(status == "DISC") {
-                status = "null";
+            } else if(enumNamespace::g_status == enumNamespace::PacketType::DISC) {
+                enumNamespace::g_status = enumNamespace::PacketType::WAITING;
                 //disconnect(); // do we need to send another ACK or is this ok?
             }
             std::cout << "ACK <" << ((ACKpacket *) message)->getBlockNumber() << ">" << std::endl;
@@ -47,25 +47,24 @@ void Protocol::process(Packet* message) {
             break;
 
         case enumNamespace::PacketType::DATA:
-            if(status == "download") {
+            if(enumNamespace::g_status == enumNamespace::PacketType::RRQ) {
                 for (int i = 0; i < ((DATApacket*)message)->getData().size(); ++i) {
                     downloadArr->push_back((char &&) ((DATApacket*)message)->getData().at(i));
                 }
                 sendList->push( ACKpacket( ((DATApacket*)message)->getBlockNumber()));
                 if(((DATApacket*)message)->getData().size() < 512) {
-                    status = "null";
-                    //take all the
+                    enumNamespace::g_status = enumNamespace::PacketType::WAITING;
                     std::cout << "RRQ <" << fileDownloadName << ">" << " complete" << std::endl;
                 }
 
-            } else if(status == "dirq" && !finishDownload) {
+            } else if(enumNamespace::g_status == enumNamespace::PacketType::DIRQ) {
                 for (int i = 0; i < ((DATApacket*)message)->getData().size(); ++i) {
                     dirqArr->push_back((char &&) ((DATApacket*)message)->getData().at(i));
-                    sendList->push( ACKpacket( ((DATApacket*)message)->getBlockNumber()));
                 }
+                    sendList->push( ACKpacket( ((DATApacket*)message)->getBlockNumber()));
                 if(((DATApacket*)message)->getData().size() < 512) { // we can assume we get the packets in the right order
                     finishDownload = true;
-                    status = "null";
+                    enumNamespace::g_status = enumNamespace::PacketType::WAITING;
                     //we can add this to the Queue...
                     printDirq(*dirqArr); // not sure if * is right here
                 }

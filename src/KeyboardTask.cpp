@@ -26,6 +26,8 @@ void KeyboardTask::operator()(){
 
         //TODO convert to packet
 
+        Packet sendPacket = handleKeyboard::proccess(line);
+
         // put the packet to outgoing messages (using lock)
         if (!_connectionHandler->sendLine(line)) {
             std::cout << "Disconnected. Exiting...\n" << std::endl;

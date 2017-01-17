@@ -6,33 +6,26 @@ Packet handleKeyboard::process ( String str) {
     std::size_t found = str.find_first_of(" ");
     std::string command = std::string::str.substr(0, found);
     std::string fileName = std::string::str.substr(found);
-    switch(str) {
-        case "DIRQ":
+    switch(command) {
+        case DIRQ:
+            enumNamespace::g_status = enumNamespace::PacketType::DIRQ;
             return DIRQpacket();
-            status = "DIRQ";
-            break;
-        case "DELRQ":
-            sendList->push(DELRQpacket(fileName));
-            status = "DELRQ";
-            break;
-        case "RRQ":
-            sendList->push(RRQpacket(fileName));
-            status = "RRQ";
-            break;
-        case "WRQ":
+        case DELRQ:
+            enumNamespace::g_status = enumNamespace::PacketType::DELRQ;
+            return DELRQpacket(fileName);
+        case RRQ:
+            enumNamespace::g_status = enumNamespace::PacketType::RRQ;
+            return RRQpacket(fileName);
+        case WRQ:
             //split file into packets. put the packets into a vector
             splitFileIntoDataPackets(fileName);
-            //send first packet
-            sendList->push(WRQpacket(fileName));
-            status = "WRQ";
-            break;
-        case "LOGRQ":
-            sendList->push(LOGRQpacket(fileName));
-            status = "LOGRQ";
-            break;
-        case "DISC":
-            sendList->push(DISCQpacket());
-            status = "DISC";
-            break;
+            enumNamespace::g_status = enumNamespace::PacketType::WRQ;
+            return WRQpacket(fileName);
+        case LOGRQ:
+            enumNamespace::g_status = enumNamespace::PacketType::LOGRQ;
+            return LOGRQpacket(fileName);
+        case DISC:
+            enumNamespace::g_status = enumNamespace::PacketType::DISC;
+            return DISCQpacket();
     }
 }
