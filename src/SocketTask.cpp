@@ -5,8 +5,11 @@
 #include "../include/SocketTask.h"
 #include <iostream>
 #include <boost/thread.hpp>
+#include "./../include/concurrent_queue.h"
+#include "../include/packets/Packet.h"
 
-SocketTask::SocketTask(int number) : _id(number) {}
+SocketTask::SocketTask(int* pendingTasks, concurrent_queue<Packet>* outgoingMessages, concurrent_queue<Packet>* incomingMessages)
+        : _pendingTasks(pendingTasks), _outgoingMessages(outgoingMessages), _incomingMessages(incomingMessages) {}
 
 void SocketTask::operator()(){
     while(true){ //while connected? use lock?

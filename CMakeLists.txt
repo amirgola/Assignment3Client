@@ -23,6 +23,8 @@ set(SOURCE_FILES
         include/packets/RRQpacket.h
         include/packets/WRQpacket.h
         include/concurrent_queue.h
+        include/KeyboardTask.h
+        include/SocketTask.h
         src/packets/ACKpacket.cpp
         src/packets/BCASTpacket.cpp
         src/packets/DATApacket.cpp
@@ -36,6 +38,8 @@ set(SOURCE_FILES
         src/packets/WRQpacket.cpp
         src/concurrent_queue.cpp
         src/connectionHandler.cpp
+        src/KeyboardTask.cpp
+        src/SocketTask.cpp
         src/echoClient.cpp
         src/MessageEncoderDecoder.cpp)
 

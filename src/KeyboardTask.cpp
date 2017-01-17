@@ -5,8 +5,11 @@
 #include "../include/KeyboardTask.h"
 #include <iostream>
 #include <boost/thread.hpp>
+#include "./../include/concurrent_queue.h"
+#include "../include/packets/Packet.h"
 
-KeyboardTask::KeyboardTask(int number) : _id(number) {}
+KeyboardTask::KeyboardTask(int* pendingTasks, concurrent_queue<Packet>* outgoingMessages, concurrent_queue<Packet>* incomingMessages)
+        : _pendingTasks(pendingTasks), _outgoingMessages(outgoingMessages), _incomingMessages(incomingMessages) {}
 
 void KeyboardTask::operator()(){
     while(true){ //while connected? use lock?
