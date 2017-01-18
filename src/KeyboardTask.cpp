@@ -29,17 +29,17 @@ void KeyboardTask::operator()(){
         // get input
         const short bufsize = 512;
         char buf[bufsize];
-        //std::cin.getline(buf, bufsize);
-//        std::string line(buf);
-//        int len=line.length();
-        std::cout << "Sent bytes to server" << std::endl;
-        std::string mystr;
-        std::cout << "Sent " << " bytes to server" << std::endl;
-        std::getline (std::cin, mystr);
+        std::cin.getline(buf, bufsize);
+        std::string line(buf);
+        int len=line.length();
+    //    std::cout << "Sent bytes to server" << std::endl;
+     //   std::string mystr;
+       // std::cout << "Sent " << " bytes to server" << std::endl;
+        //std::getline (std::cin, mystr);
 
-        Packet sendPacket = keyboardParsing(mystr);
+        Packet* sendPacket = keyboardParsing(buf);
         MessageEncoderDecoder encDec = MessageEncoderDecoder();
-        std::vector<char> encodedMessage = encDec.encode(&sendPacket);
+        std::vector<char> encodedMessage = encDec.encode(sendPacket);
         std::string toSend(encodedMessage.begin(), encodedMessage.end());
         if(!_protocol->getConnectionHandler()->sendLine(toSend)){
             break;
@@ -57,37 +57,37 @@ void KeyboardTask::operator()(){
 // Created by Medhopz on 1/17/2017.
 //
 
-Packet KeyboardTask::keyboardParsing (std::string str) {
+Packet* KeyboardTask::keyboardParsing (std::string str) {
     std::size_t found = str.find_first_of(' ');
     std::string fileName = str.substr(static_cast<int>(found)+1);
     std::string command = str.substr(0, static_cast<int>(found));
 
     if(command == "DIRQ") {
         enumNamespace::g_status = enumNamespace::PacketType::DIRQ;
-        return DIRQpacket();
+        return new DIRQpacket();
     }
     if(command =="DELRQ") {
         enumNamespace::g_status = enumNamespace::PacketType::DELRQ;
-        return DELRQpacket(fileName);
+        return new DELRQpacket(fileName);
     }
     if(command == "RRQ") {
         enumNamespace::g_fileNameString = fileName;
         enumNamespace::g_status = enumNamespace::PacketType::RRQ;
-        return RRQpacket(fileName);
+        return new RRQpacket(fileName);
     }
     if(command == "WRQ") {
         enumNamespace::g_fileNameString = fileName;
         enumNamespace::g_status = enumNamespace::PacketType::WRQ;
-        return WRQpacket(fileName);
+        return new WRQpacket(fileName);
     }
     if(command == "LOGRQ") {
         enumNamespace::g_status = enumNamespace::PacketType::LOGRQ;
-        return LOGRQpacket(fileName);
+        return new LOGRQpacket(fileName);
     }
     if(command == "DISC") {
         enumNamespace::g_status = enumNamespace::PacketType::DISC;
-        return DISCpacket();
+        return new DISCpacket();
     }
 
-    return ERRORpacket(0, "Incorrect command");
+    return new ERRORpacket(0, "Incorrect command");
 }

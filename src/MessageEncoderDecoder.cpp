@@ -134,8 +134,8 @@ Packet MessageEncoderDecoder::decodeNextByte(char nextByte) {
 
 
 std::vector<char> MessageEncoderDecoder::encode(Packet* message) {
-    char *opCodeArray;
-    char *blkNumArray;
+    char opCodeArray[2];
+    char blkNumArray[2];
     std::vector<char> temp;
     std::vector<char> res;
     opCode = message->getOpCode();
@@ -167,12 +167,11 @@ std::vector<char> MessageEncoderDecoder::encode(Packet* message) {
         case enumNamespace::PacketType::LOGRQ: {
             res.clear();
             LOGRQpacket *logPacket = (LOGRQpacket *) message;
-            shortToBytes(message->getOpCode(), opCodeArray);
+            shortToBytes(opCode, opCodeArray);
             res.push_back(opCodeArray[0]);
             res.push_back(opCodeArray[1]);
-            std::vector<char> name(logPacket->getUserName().begin(), logPacket->getUserName().end());
-            for (int i = 0; i < name.size(); i++) {
-                res.push_back(name[i]);
+            for(char& c : logPacket->getUserName()) {
+                res.push_back(c);
             }
 
             res.push_back(0);

@@ -15,7 +15,7 @@ private:
 public:
     KeyboardTask(int* pendingTasks, boost::mutex* mutex, Protocol* protocol);
     void operator()();
-    Packet keyboardParsing (std::string str);
+    Packet* keyboardParsing (std::string str);
 };
 
 #endif //BOOST_ECHO_CLIENT_KEYBOARDTASK_H

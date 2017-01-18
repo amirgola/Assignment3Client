@@ -10,7 +10,7 @@ private:
     short opCode_;
     std::string msgType;
 public:
-    Packet();
+    Packet(short opCode);
     Packet(const Packet& other);
     short getOpCode();
     std::string getMsgType();
