@@ -1,5 +1,5 @@
-#ifndef MessageEncoderDecoder_H_
-#define MessageEncoderDecoder_H_
+#ifndef MESSAGEENCODERDECODER_H_
+#define MESSAGEENCODERDECODER_H_
 
 #include "./packets/Packet.h"
 #include <vector>
@@ -10,8 +10,6 @@
 class MessageEncoderDecoder {
 private:
     short opCode;
-    std::vector<char> opCodeBytes;
-    int opCodeLen;
     std::string strBuffer;
     std::vector<char> buffer;
     //for data packet
@@ -21,13 +19,13 @@ private:
     short errCode;
 
     void shortToBytes(short num, char* bytesArr);
-    short bytesToShort(std::vector<char> byteArr);
+    short bytesToShort(char* bytesArr);
     void resetBuffer();
-    void findOpCode(char nextByte);
 
 public:
-    Packet decodeNextByte(char nextByte);
+    Packet* decodeNextByte(char nextByte);
     std::vector<char> encode(Packet* message);
+    short decodePacketType(char bytes[]);
     ~MessageEncoderDecoder();
 };
 

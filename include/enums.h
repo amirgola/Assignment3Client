@@ -1,3 +1,5 @@
+#ifndef ENUMS_H_
+#define ENUMS_H_
 namespace enumNamespace{
     enum PacketType {
         RRQ = 1,
@@ -17,3 +19,4 @@ namespace enumNamespace{
     extern std::string g_fileNameString;
 }
 
+#endif

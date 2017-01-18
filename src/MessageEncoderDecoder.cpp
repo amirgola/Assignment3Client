@@ -14,11 +14,9 @@
 #include "./../include/packets/Packet.h"
 
 
-Packet MessageEncoderDecoder::decodeNextByte(char nextByte) {
+Packet* MessageEncoderDecoder::decodeNextByte(char nextByte) {
     // if we have two bytes - then we can decode the rest of the message
-    if (opCode == 0) {
-        findOpCode(nextByte);
-    } else {
+    if (opCode != 0) {
         switch (opCode) {
             case enumNamespace::PacketType::RRQ : {
                 if (nextByte != '\0') {
@@ -26,7 +24,7 @@ Packet MessageEncoderDecoder::decodeNextByte(char nextByte) {
                 } else {
                     strBuffer = std::string(buffer.begin(), buffer.end());
                     resetBuffer();
-                    return RRQpacket(strBuffer);
+                    return new RRQpacket(strBuffer);
                 }
                 break;
             }
@@ -36,7 +34,7 @@ Packet MessageEncoderDecoder::decodeNextByte(char nextByte) {
                 } else {
                     strBuffer = std::string(buffer.begin(), buffer.end());
                     resetBuffer();
-                    return WRQpacket(strBuffer);
+                    return  new WRQpacket(strBuffer);
                 }
                 break;
             }
@@ -44,18 +42,18 @@ Packet MessageEncoderDecoder::decodeNextByte(char nextByte) {
                 if (buffer.size() < 4) { // 0,1,2,3 position get filled in buffer
                     buffer.push_back(nextByte);
                     if (buffer.size() == 2) {
-                        pckSize = bytesToShort(buffer);
+                        pckSize = bytesToShort(reinterpret_cast<char*>(buffer.data()));
                         dataArr = new std::vector<char>();
                     }
                     if (buffer.size() == 4) {
                         std::vector<char> newVector(buffer.begin() + 2, buffer.end());
-                        blkNum = bytesToShort(newVector);
+                        blkNum = bytesToShort(reinterpret_cast<char*>(newVector.data()));
                     }
                 } else {
                     dataArr->push_back(nextByte);
                     if (dataArr->size() == pckSize) {
                         resetBuffer();
-                        return DATApacket(pckSize, blkNum, *dataArr);
+                        return new DATApacket(pckSize, blkNum, *dataArr);
                     }
                 }
                 break;
@@ -65,7 +63,7 @@ Packet MessageEncoderDecoder::decodeNextByte(char nextByte) {
                 if (buffer.size() >= 2) {
                     std::vector<char> newVector(buffer);
                     resetBuffer();
-                    return ACKpacket(bytesToShort(newVector));
+                    return new ACKpacket(bytesToShort(reinterpret_cast<char*>(newVector.data())));
                 }
                 break;
             }
@@ -73,18 +71,18 @@ Packet MessageEncoderDecoder::decodeNextByte(char nextByte) {
                 if (nextByte != '\0') {
                     buffer.push_back(nextByte);
                     if (buffer.size() == 2) {
-                        errCode = bytesToShort(buffer);
+                        errCode = bytesToShort(reinterpret_cast<char*>(buffer.data()));
                     }
                 } else {
                     short errorCode = errCode;
                     resetBuffer();
-                    return ERRORpacket(errorCode, std::string(buffer.begin() + 2, buffer.end()));
+                    return new ERRORpacket(errorCode, std::string(buffer.begin() + 2, buffer.end()));
                 }
                 break;
             }
             case enumNamespace::PacketType::DIRQ: {
                 resetBuffer();
-                return DIRQpacket();
+                return new DIRQpacket();
             }
             case enumNamespace::PacketType::LOGRQ: {
                 if (nextByte != '\0') {
@@ -92,7 +90,7 @@ Packet MessageEncoderDecoder::decodeNextByte(char nextByte) {
                 } else {
                     strBuffer = std::string(buffer.begin(), buffer.end());
                     resetBuffer();
-                    return LOGRQpacket(strBuffer);
+                    return new LOGRQpacket(strBuffer);
                 }
                 break;
             }
@@ -102,7 +100,7 @@ Packet MessageEncoderDecoder::decodeNextByte(char nextByte) {
                 } else {
                     strBuffer = std::string(buffer.begin(), buffer.end());
                     resetBuffer();
-                    return DELRQpacket(strBuffer);
+                    return new DELRQpacket(strBuffer);
                 }
                 break;
             }
@@ -113,25 +111,30 @@ Packet MessageEncoderDecoder::decodeNextByte(char nextByte) {
                     char delAdd = buffer.at(0);
                     strBuffer = std::string(buffer.begin() + 1, buffer.end());
                     resetBuffer();
-                    return BCASTpacket(delAdd, strBuffer);
+                    return new BCASTpacket(delAdd, strBuffer);
                 }
                 break;
             }
             case enumNamespace::PacketType::DISC: {
                 resetBuffer();
-                return DISCpacket();
+                return new DISCpacket();
             }
             case enumNamespace::PacketType::UNKNOWN:
             default: {
                 resetBuffer();
-                return ERRORpacket(4, "unknown OP code");
+                return new ERRORpacket(4, "unknown OP code");
             }
         }
     }
 
-    return ERRORpacket(999, "unknown OP code");
+    return nullptr;
 }
 
+short MessageEncoderDecoder::decodePacketType(char bytes[]){
+    //&a[0]
+    opCode = bytesToShort(&bytes[0]);
+    return opCode;
+}
 
 std::vector<char> MessageEncoderDecoder::encode(Packet* message) {
     char opCodeArray[2];
@@ -224,13 +227,12 @@ std::vector<char> MessageEncoderDecoder::encode(Packet* message) {
         }
         case enumNamespace::PacketType::DELRQ: {
             shortToBytes(message->getOpCode(), opCodeArray);
-            temp = std::vector<char>(((DELRQpacket *) message)->getFileName().begin(),
-                                     ((DELRQpacket *) message)->getFileName().end());
 
             res.push_back(opCodeArray[0]);
             res.push_back(opCodeArray[1]);
-            for (int i = 0; i < temp.size(); ++i) {
-                res.push_back((char &&) temp.at(i));
+
+            for(char& c : ((DELRQpacket *) message)->getFileName()) {
+                res.push_back(c);
             }
             res.push_back(0);
             return res;
@@ -254,27 +256,15 @@ void MessageEncoderDecoder::shortToBytes(short num, char* bytesArr) {
     bytesArr[1] = (num & 0xFF);
 }
 
-short MessageEncoderDecoder::bytesToShort(std::vector<char> byteArr){
-    short result = (short)((byteArr[0] & 0xff) << 8);
-    result += (short)(byteArr[1] & 0xff);
+short MessageEncoderDecoder::bytesToShort(char* bytesArr){
+    short result = (short)((bytesArr[0] & 0xff) << 8);
+    result += (short)(bytesArr[1] & 0xff);
     return result;
 }
 
 void MessageEncoderDecoder::resetBuffer(){
     buffer.clear();
-    //reset the opcode array
-    opCodeLen = 0;
-    opCodeBytes[0] = 0;
-    opCodeBytes[1] = 0;
     errCode = 0;
-
-}
-
-void MessageEncoderDecoder::findOpCode(char nextByte) {
-    opCodeBytes[opCodeLen++] = nextByte;
-    if (opCodeLen == 2) {
-        opCode = bytesToShort(opCodeBytes);
-    }
 }
 
 MessageEncoderDecoder::~MessageEncoderDecoder(){

@@ -31,12 +31,21 @@ void SocketTask::operator()(){
         }
         // decode
         MessageEncoderDecoder encDec = MessageEncoderDecoder();
-//        for(char& c : answer) {
-//            Packet packet = encDec.decodeNextByte(c);
-//            if(packet.getOpCode() != enumNamespace::PacketType::ERROR || ((ERRORpacket*)&packet)->getErrCode() != 999){
-//                _protocol->process(&packet);
-//            }
-//        }
+        short type = encDec.decodePacketType(bytes);
+
+        char message[1];
+        Packet* packet;
+
+        while(packet == nullptr) {
+            if(!_protocol->getConnectionHandler()->getBytes(message, 1)){
+                break;
+            }
+            packet = encDec.decodeNextByte(message[0]);
+        }
+
+        if(packet != nullptr){
+            _protocol->process(packet);
+        }
     }
 
     boost::this_thread::yield(); //Gives up the remainder of the current thread's time slice, to allow other threads to run.
