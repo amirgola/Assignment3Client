@@ -32,16 +32,13 @@ void KeyboardTask::operator()(){
         std::cin.getline(buf, bufsize);
         std::string line(buf);
         int len=line.length();
-    //    std::cout << "Sent bytes to server" << std::endl;
-     //   std::string mystr;
-       // std::cout << "Sent " << " bytes to server" << std::endl;
-        //std::getline (std::cin, mystr);
 
         Packet* sendPacket = keyboardParsing(buf);
         MessageEncoderDecoder encDec = MessageEncoderDecoder();
         std::vector<char> encodedMessage = encDec.encode(sendPacket);
         std::string toSend(encodedMessage.begin(), encodedMessage.end());
-        if(!_protocol->getConnectionHandler()->sendLine(toSend)){
+
+        if(!_protocol->getConnectionHandler()->sendBytes(toSend.c_str(),toSend.length())){
             break;
         }
 

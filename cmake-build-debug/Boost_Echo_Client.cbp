@@ -80,13 +80,106 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/include/KeyboardTask.h">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/include/MessageEncoderDecoder.h">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/include/Protocol.h">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/include/SocketTask.h">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
 		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/include/connectionHandler.h">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/include/enums.h">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/include/packets/ACKpacket.h">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/include/packets/BCASTpacket.h">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/include/packets/DATApacket.h">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/include/packets/DELRQpacket.h">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/include/packets/DIRQpacket.h">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/include/packets/DISCpacket.h">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/include/packets/ERRORpacket.h">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/include/packets/LOGRQpacket.h">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/include/packets/Packet.h">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/include/packets/RRQpacket.h">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/include/packets/WRQpacket.h">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/src/KeyboardTask.cpp">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/src/MessageEncoderDecoder.cpp">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/src/Protocol.cpp">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/src/SocketTask.cpp">
 			<Option target="Boost_Echo_Client"/>
 		</Unit>
 		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/src/connectionHandler.cpp">
 			<Option target="Boost_Echo_Client"/>
 		</Unit>
 		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/src/echoClient.cpp">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/src/packets/ACKpacket.cpp">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/src/packets/BCASTpacket.cpp">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/src/packets/DATApacket.cpp">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/src/packets/DELRQpacket.cpp">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/src/packets/DIRQpacket.cpp">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/src/packets/DISCpacket.cpp">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/src/packets/ERRORpacket.cpp">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/src/packets/LOGRQpacket.cpp">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/src/packets/Packet.cpp">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/src/packets/RRQpacket.cpp">
+			<Option target="Boost_Echo_Client"/>
+		</Unit>
+		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/src/packets/WRQpacket.cpp">
 			<Option target="Boost_Echo_Client"/>
 		</Unit>
 		<Unit filename="/Users/stephanieschustermann/Documents/personal/bgu/spl/ass3/Assignment3Client/CMakeLists.txt">

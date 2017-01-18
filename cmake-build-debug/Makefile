@@ -123,6 +123,114 @@ Boost_Echo_Client/fast:
 	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/build
 .PHONY : Boost_Echo_Client/fast
 
+src/KeyboardTask.o: src/KeyboardTask.cpp.o
+
+.PHONY : src/KeyboardTask.o
+
+# target to build an object file
+src/KeyboardTask.cpp.o:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/KeyboardTask.cpp.o
+.PHONY : src/KeyboardTask.cpp.o
+
+src/KeyboardTask.i: src/KeyboardTask.cpp.i
+
+.PHONY : src/KeyboardTask.i
+
+# target to preprocess a source file
+src/KeyboardTask.cpp.i:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/KeyboardTask.cpp.i
+.PHONY : src/KeyboardTask.cpp.i
+
+src/KeyboardTask.s: src/KeyboardTask.cpp.s
+
+.PHONY : src/KeyboardTask.s
+
+# target to generate assembly for a file
+src/KeyboardTask.cpp.s:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/KeyboardTask.cpp.s
+.PHONY : src/KeyboardTask.cpp.s
+
+src/MessageEncoderDecoder.o: src/MessageEncoderDecoder.cpp.o
+
+.PHONY : src/MessageEncoderDecoder.o
+
+# target to build an object file
+src/MessageEncoderDecoder.cpp.o:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/MessageEncoderDecoder.cpp.o
+.PHONY : src/MessageEncoderDecoder.cpp.o
+
+src/MessageEncoderDecoder.i: src/MessageEncoderDecoder.cpp.i
+
+.PHONY : src/MessageEncoderDecoder.i
+
+# target to preprocess a source file
+src/MessageEncoderDecoder.cpp.i:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/MessageEncoderDecoder.cpp.i
+.PHONY : src/MessageEncoderDecoder.cpp.i
+
+src/MessageEncoderDecoder.s: src/MessageEncoderDecoder.cpp.s
+
+.PHONY : src/MessageEncoderDecoder.s
+
+# target to generate assembly for a file
+src/MessageEncoderDecoder.cpp.s:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/MessageEncoderDecoder.cpp.s
+.PHONY : src/MessageEncoderDecoder.cpp.s
+
+src/Protocol.o: src/Protocol.cpp.o
+
+.PHONY : src/Protocol.o
+
+# target to build an object file
+src/Protocol.cpp.o:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.o
+.PHONY : src/Protocol.cpp.o
+
+src/Protocol.i: src/Protocol.cpp.i
+
+.PHONY : src/Protocol.i
+
+# target to preprocess a source file
+src/Protocol.cpp.i:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.i
+.PHONY : src/Protocol.cpp.i
+
+src/Protocol.s: src/Protocol.cpp.s
+
+.PHONY : src/Protocol.s
+
+# target to generate assembly for a file
+src/Protocol.cpp.s:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/Protocol.cpp.s
+.PHONY : src/Protocol.cpp.s
+
+src/SocketTask.o: src/SocketTask.cpp.o
+
+.PHONY : src/SocketTask.o
+
+# target to build an object file
+src/SocketTask.cpp.o:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/SocketTask.cpp.o
+.PHONY : src/SocketTask.cpp.o
+
+src/SocketTask.i: src/SocketTask.cpp.i
+
+.PHONY : src/SocketTask.i
+
+# target to preprocess a source file
+src/SocketTask.cpp.i:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/SocketTask.cpp.i
+.PHONY : src/SocketTask.cpp.i
+
+src/SocketTask.s: src/SocketTask.cpp.s
+
+.PHONY : src/SocketTask.s
+
+# target to generate assembly for a file
+src/SocketTask.cpp.s:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/SocketTask.cpp.s
+.PHONY : src/SocketTask.cpp.s
+
 src/connectionHandler.o: src/connectionHandler.cpp.o
 
 .PHONY : src/connectionHandler.o
@@ -177,6 +285,303 @@ src/echoClient.cpp.s:
 	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/echoClient.cpp.s
 .PHONY : src/echoClient.cpp.s
 
+src/packets/ACKpacket.o: src/packets/ACKpacket.cpp.o
+
+.PHONY : src/packets/ACKpacket.o
+
+# target to build an object file
+src/packets/ACKpacket.cpp.o:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/ACKpacket.cpp.o
+.PHONY : src/packets/ACKpacket.cpp.o
+
+src/packets/ACKpacket.i: src/packets/ACKpacket.cpp.i
+
+.PHONY : src/packets/ACKpacket.i
+
+# target to preprocess a source file
+src/packets/ACKpacket.cpp.i:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/ACKpacket.cpp.i
+.PHONY : src/packets/ACKpacket.cpp.i
+
+src/packets/ACKpacket.s: src/packets/ACKpacket.cpp.s
+
+.PHONY : src/packets/ACKpacket.s
+
+# target to generate assembly for a file
+src/packets/ACKpacket.cpp.s:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/ACKpacket.cpp.s
+.PHONY : src/packets/ACKpacket.cpp.s
+
+src/packets/BCASTpacket.o: src/packets/BCASTpacket.cpp.o
+
+.PHONY : src/packets/BCASTpacket.o
+
+# target to build an object file
+src/packets/BCASTpacket.cpp.o:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/BCASTpacket.cpp.o
+.PHONY : src/packets/BCASTpacket.cpp.o
+
+src/packets/BCASTpacket.i: src/packets/BCASTpacket.cpp.i
+
+.PHONY : src/packets/BCASTpacket.i
+
+# target to preprocess a source file
+src/packets/BCASTpacket.cpp.i:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/BCASTpacket.cpp.i
+.PHONY : src/packets/BCASTpacket.cpp.i
+
+src/packets/BCASTpacket.s: src/packets/BCASTpacket.cpp.s
+
+.PHONY : src/packets/BCASTpacket.s
+
+# target to generate assembly for a file
+src/packets/BCASTpacket.cpp.s:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/BCASTpacket.cpp.s
+.PHONY : src/packets/BCASTpacket.cpp.s
+
+src/packets/DATApacket.o: src/packets/DATApacket.cpp.o
+
+.PHONY : src/packets/DATApacket.o
+
+# target to build an object file
+src/packets/DATApacket.cpp.o:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/DATApacket.cpp.o
+.PHONY : src/packets/DATApacket.cpp.o
+
+src/packets/DATApacket.i: src/packets/DATApacket.cpp.i
+
+.PHONY : src/packets/DATApacket.i
+
+# target to preprocess a source file
+src/packets/DATApacket.cpp.i:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/DATApacket.cpp.i
+.PHONY : src/packets/DATApacket.cpp.i
+
+src/packets/DATApacket.s: src/packets/DATApacket.cpp.s
+
+.PHONY : src/packets/DATApacket.s
+
+# target to generate assembly for a file
+src/packets/DATApacket.cpp.s:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/DATApacket.cpp.s
+.PHONY : src/packets/DATApacket.cpp.s
+
+src/packets/DELRQpacket.o: src/packets/DELRQpacket.cpp.o
+
+.PHONY : src/packets/DELRQpacket.o
+
+# target to build an object file
+src/packets/DELRQpacket.cpp.o:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/DELRQpacket.cpp.o
+.PHONY : src/packets/DELRQpacket.cpp.o
+
+src/packets/DELRQpacket.i: src/packets/DELRQpacket.cpp.i
+
+.PHONY : src/packets/DELRQpacket.i
+
+# target to preprocess a source file
+src/packets/DELRQpacket.cpp.i:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/DELRQpacket.cpp.i
+.PHONY : src/packets/DELRQpacket.cpp.i
+
+src/packets/DELRQpacket.s: src/packets/DELRQpacket.cpp.s
+
+.PHONY : src/packets/DELRQpacket.s
+
+# target to generate assembly for a file
+src/packets/DELRQpacket.cpp.s:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/DELRQpacket.cpp.s
+.PHONY : src/packets/DELRQpacket.cpp.s
+
+src/packets/DIRQpacket.o: src/packets/DIRQpacket.cpp.o
+
+.PHONY : src/packets/DIRQpacket.o
+
+# target to build an object file
+src/packets/DIRQpacket.cpp.o:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/DIRQpacket.cpp.o
+.PHONY : src/packets/DIRQpacket.cpp.o
+
+src/packets/DIRQpacket.i: src/packets/DIRQpacket.cpp.i
+
+.PHONY : src/packets/DIRQpacket.i
+
+# target to preprocess a source file
+src/packets/DIRQpacket.cpp.i:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/DIRQpacket.cpp.i
+.PHONY : src/packets/DIRQpacket.cpp.i
+
+src/packets/DIRQpacket.s: src/packets/DIRQpacket.cpp.s
+
+.PHONY : src/packets/DIRQpacket.s
+
+# target to generate assembly for a file
+src/packets/DIRQpacket.cpp.s:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/DIRQpacket.cpp.s
+.PHONY : src/packets/DIRQpacket.cpp.s
+
+src/packets/DISCpacket.o: src/packets/DISCpacket.cpp.o
+
+.PHONY : src/packets/DISCpacket.o
+
+# target to build an object file
+src/packets/DISCpacket.cpp.o:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/DISCpacket.cpp.o
+.PHONY : src/packets/DISCpacket.cpp.o
+
+src/packets/DISCpacket.i: src/packets/DISCpacket.cpp.i
+
+.PHONY : src/packets/DISCpacket.i
+
+# target to preprocess a source file
+src/packets/DISCpacket.cpp.i:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/DISCpacket.cpp.i
+.PHONY : src/packets/DISCpacket.cpp.i
+
+src/packets/DISCpacket.s: src/packets/DISCpacket.cpp.s
+
+.PHONY : src/packets/DISCpacket.s
+
+# target to generate assembly for a file
+src/packets/DISCpacket.cpp.s:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/DISCpacket.cpp.s
+.PHONY : src/packets/DISCpacket.cpp.s
+
+src/packets/ERRORpacket.o: src/packets/ERRORpacket.cpp.o
+
+.PHONY : src/packets/ERRORpacket.o
+
+# target to build an object file
+src/packets/ERRORpacket.cpp.o:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/ERRORpacket.cpp.o
+.PHONY : src/packets/ERRORpacket.cpp.o
+
+src/packets/ERRORpacket.i: src/packets/ERRORpacket.cpp.i
+
+.PHONY : src/packets/ERRORpacket.i
+
+# target to preprocess a source file
+src/packets/ERRORpacket.cpp.i:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/ERRORpacket.cpp.i
+.PHONY : src/packets/ERRORpacket.cpp.i
+
+src/packets/ERRORpacket.s: src/packets/ERRORpacket.cpp.s
+
+.PHONY : src/packets/ERRORpacket.s
+
+# target to generate assembly for a file
+src/packets/ERRORpacket.cpp.s:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/ERRORpacket.cpp.s
+.PHONY : src/packets/ERRORpacket.cpp.s
+
+src/packets/LOGRQpacket.o: src/packets/LOGRQpacket.cpp.o
+
+.PHONY : src/packets/LOGRQpacket.o
+
+# target to build an object file
+src/packets/LOGRQpacket.cpp.o:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/LOGRQpacket.cpp.o
+.PHONY : src/packets/LOGRQpacket.cpp.o
+
+src/packets/LOGRQpacket.i: src/packets/LOGRQpacket.cpp.i
+
+.PHONY : src/packets/LOGRQpacket.i
+
+# target to preprocess a source file
+src/packets/LOGRQpacket.cpp.i:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/LOGRQpacket.cpp.i
+.PHONY : src/packets/LOGRQpacket.cpp.i
+
+src/packets/LOGRQpacket.s: src/packets/LOGRQpacket.cpp.s
+
+.PHONY : src/packets/LOGRQpacket.s
+
+# target to generate assembly for a file
+src/packets/LOGRQpacket.cpp.s:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/LOGRQpacket.cpp.s
+.PHONY : src/packets/LOGRQpacket.cpp.s
+
+src/packets/Packet.o: src/packets/Packet.cpp.o
+
+.PHONY : src/packets/Packet.o
+
+# target to build an object file
+src/packets/Packet.cpp.o:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/Packet.cpp.o
+.PHONY : src/packets/Packet.cpp.o
+
+src/packets/Packet.i: src/packets/Packet.cpp.i
+
+.PHONY : src/packets/Packet.i
+
+# target to preprocess a source file
+src/packets/Packet.cpp.i:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/Packet.cpp.i
+.PHONY : src/packets/Packet.cpp.i
+
+src/packets/Packet.s: src/packets/Packet.cpp.s
+
+.PHONY : src/packets/Packet.s
+
+# target to generate assembly for a file
+src/packets/Packet.cpp.s:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/Packet.cpp.s
+.PHONY : src/packets/Packet.cpp.s
+
+src/packets/RRQpacket.o: src/packets/RRQpacket.cpp.o
+
+.PHONY : src/packets/RRQpacket.o
+
+# target to build an object file
+src/packets/RRQpacket.cpp.o:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/RRQpacket.cpp.o
+.PHONY : src/packets/RRQpacket.cpp.o
+
+src/packets/RRQpacket.i: src/packets/RRQpacket.cpp.i
+
+.PHONY : src/packets/RRQpacket.i
+
+# target to preprocess a source file
+src/packets/RRQpacket.cpp.i:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/RRQpacket.cpp.i
+.PHONY : src/packets/RRQpacket.cpp.i
+
+src/packets/RRQpacket.s: src/packets/RRQpacket.cpp.s
+
+.PHONY : src/packets/RRQpacket.s
+
+# target to generate assembly for a file
+src/packets/RRQpacket.cpp.s:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/RRQpacket.cpp.s
+.PHONY : src/packets/RRQpacket.cpp.s
+
+src/packets/WRQpacket.o: src/packets/WRQpacket.cpp.o
+
+.PHONY : src/packets/WRQpacket.o
+
+# target to build an object file
+src/packets/WRQpacket.cpp.o:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/WRQpacket.cpp.o
+.PHONY : src/packets/WRQpacket.cpp.o
+
+src/packets/WRQpacket.i: src/packets/WRQpacket.cpp.i
+
+.PHONY : src/packets/WRQpacket.i
+
+# target to preprocess a source file
+src/packets/WRQpacket.cpp.i:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/WRQpacket.cpp.i
+.PHONY : src/packets/WRQpacket.cpp.i
+
+src/packets/WRQpacket.s: src/packets/WRQpacket.cpp.s
+
+.PHONY : src/packets/WRQpacket.s
+
+# target to generate assembly for a file
+src/packets/WRQpacket.cpp.s:
+	$(MAKE) -f CMakeFiles/Boost_Echo_Client.dir/build.make CMakeFiles/Boost_Echo_Client.dir/src/packets/WRQpacket.cpp.s
+.PHONY : src/packets/WRQpacket.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -186,12 +591,57 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Boost_Echo_Client"
+	@echo "... src/KeyboardTask.o"
+	@echo "... src/KeyboardTask.i"
+	@echo "... src/KeyboardTask.s"
+	@echo "... src/MessageEncoderDecoder.o"
+	@echo "... src/MessageEncoderDecoder.i"
+	@echo "... src/MessageEncoderDecoder.s"
+	@echo "... src/Protocol.o"
+	@echo "... src/Protocol.i"
+	@echo "... src/Protocol.s"
+	@echo "... src/SocketTask.o"
+	@echo "... src/SocketTask.i"
+	@echo "... src/SocketTask.s"
 	@echo "... src/connectionHandler.o"
 	@echo "... src/connectionHandler.i"
 	@echo "... src/connectionHandler.s"
 	@echo "... src/echoClient.o"
 	@echo "... src/echoClient.i"
 	@echo "... src/echoClient.s"
+	@echo "... src/packets/ACKpacket.o"
+	@echo "... src/packets/ACKpacket.i"
+	@echo "... src/packets/ACKpacket.s"
+	@echo "... src/packets/BCASTpacket.o"
+	@echo "... src/packets/BCASTpacket.i"
+	@echo "... src/packets/BCASTpacket.s"
+	@echo "... src/packets/DATApacket.o"
+	@echo "... src/packets/DATApacket.i"
+	@echo "... src/packets/DATApacket.s"
+	@echo "... src/packets/DELRQpacket.o"
+	@echo "... src/packets/DELRQpacket.i"
+	@echo "... src/packets/DELRQpacket.s"
+	@echo "... src/packets/DIRQpacket.o"
+	@echo "... src/packets/DIRQpacket.i"
+	@echo "... src/packets/DIRQpacket.s"
+	@echo "... src/packets/DISCpacket.o"
+	@echo "... src/packets/DISCpacket.i"
+	@echo "... src/packets/DISCpacket.s"
+	@echo "... src/packets/ERRORpacket.o"
+	@echo "... src/packets/ERRORpacket.i"
+	@echo "... src/packets/ERRORpacket.s"
+	@echo "... src/packets/LOGRQpacket.o"
+	@echo "... src/packets/LOGRQpacket.i"
+	@echo "... src/packets/LOGRQpacket.s"
+	@echo "... src/packets/Packet.o"
+	@echo "... src/packets/Packet.i"
+	@echo "... src/packets/Packet.s"
+	@echo "... src/packets/RRQpacket.o"
+	@echo "... src/packets/RRQpacket.i"
+	@echo "... src/packets/RRQpacket.s"
+	@echo "... src/packets/WRQpacket.o"
+	@echo "... src/packets/WRQpacket.i"
+	@echo "... src/packets/WRQpacket.s"
 .PHONY : help
 
 
