@@ -25,6 +25,7 @@ int main (int argc, char *argv[]) {
         std::cerr << "Cannot connect to " << host << ":" << port << std::endl;
         return 1;
     }
+
     Protocol protocol(&connectionHandler);
     int pendingAcks = 0;
     boost::mutex mutex;
