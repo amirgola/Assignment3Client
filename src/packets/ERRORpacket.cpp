@@ -5,14 +5,14 @@
 //
 
 ERRORpacket::ERRORpacket(short errCode, std::string errMsg):Packet::Packet(5) {
-    errCode = errCode;
-    errMsg = errMsg;
+    _errCode = errCode;
+    _errMsg = errMsg;
 }
 
 short ERRORpacket::getErrCode() {
-    return errCode;
+    return _errCode;
 }
 
 std::string ERRORpacket::getErrMsg() {
-    return errMsg;
+    return _errMsg;
 }

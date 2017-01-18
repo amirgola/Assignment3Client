@@ -39,6 +39,7 @@ Packet* MessageEncoderDecoder::decodeNextByte(char nextByte) {
                 break;
             }
             case enumNamespace::PacketType::DATA: {
+
                 if (buffer.size() < 4) { // 0,1,2,3 position get filled in buffer
                     buffer.push_back(nextByte);
                     if (buffer.size() == 2) {
@@ -51,10 +52,10 @@ Packet* MessageEncoderDecoder::decodeNextByte(char nextByte) {
                     }
                 } else {
                     dataArr->push_back(nextByte);
-                    if (dataArr->size() == pckSize) {
-                        resetBuffer();
-                        return new DATApacket(pckSize, blkNum, *dataArr);
-                    }
+                }
+                if (buffer.size() >= 4 && dataArr->size() == pckSize) {
+                    resetBuffer();
+                    return new DATApacket(pckSize, blkNum, *dataArr);
                 }
                 break;
             }
@@ -68,16 +69,18 @@ Packet* MessageEncoderDecoder::decodeNextByte(char nextByte) {
                 break;
             }
             case enumNamespace::PacketType::ERROR: {
-                if (nextByte != '\0') {
+                if(buffer.size() < 2 || nextByte != '\0')
                     buffer.push_back(nextByte);
-                    if (buffer.size() == 2) {
-                        errCode = bytesToShort(reinterpret_cast<char*>(buffer.data()));
-                    }
-                } else {
+                else {
                     short errorCode = errCode;
                     resetBuffer();
-                    return new ERRORpacket(errorCode, std::string(buffer.begin() + 2, buffer.end()));
+                    return new ERRORpacket(errorCode, "");
                 }
+
+                if (buffer.size() == 2) {
+                    errCode = bytesToShort(reinterpret_cast<char *>(buffer.data()));
+                }
+
                 break;
             }
             case enumNamespace::PacketType::DIRQ: {
@@ -105,14 +108,17 @@ Packet* MessageEncoderDecoder::decodeNextByte(char nextByte) {
                 break;
             }
             case enumNamespace::PacketType::BCAST: {
-                if (nextByte != '\0') {
+                if(buffer.size() == 0 || nextByte != '\0')
                     buffer.push_back(nextByte);
-                } else {
-                    char delAdd = buffer.at(0);
-                    strBuffer = std::string(buffer.begin() + 1, buffer.end());
-                    resetBuffer();
-                    return new BCASTpacket(delAdd, strBuffer);
+                else {
+                    if (buffer.size() > 1 && nextByte == '\0') {
+                        char delAdd = buffer.at(0);
+                        strBuffer = std::string(buffer.begin() + 1, buffer.end());
+                        resetBuffer();
+                        return new BCASTpacket(delAdd, strBuffer);
+                    }
                 }
+
                 break;
             }
             case enumNamespace::PacketType::DISC: {
@@ -219,11 +225,11 @@ std::vector<char> MessageEncoderDecoder::encode(Packet* message) {
             return res;
         }
         case enumNamespace::PacketType::DIRQ: {
-            char *result;
-            shortToBytes(message->getOpCode(), result);
-            std::string tempResult(result);
-            std::vector<char> bufferResult(tempResult.begin(), tempResult.end());
-            return bufferResult;
+            shortToBytes(message->getOpCode(), opCodeArray);
+            res.push_back(opCodeArray[0]);
+            res.push_back(opCodeArray[1]);
+
+            return res;
         }
         case enumNamespace::PacketType::DELRQ: {
             shortToBytes(message->getOpCode(), opCodeArray);
@@ -238,11 +244,10 @@ std::vector<char> MessageEncoderDecoder::encode(Packet* message) {
             return res;
         }
         case enumNamespace::PacketType::DISC: {
-            char *discResult;
-            shortToBytes(message->getOpCode(), discResult);
-            std::string discTempResult(discResult);
-            std::vector<char> bufferDiscResult(discTempResult.begin(), discTempResult.end());
-            return bufferDiscResult;
+            shortToBytes(message->getOpCode(), opCodeArray);
+            res.push_back(opCodeArray[0]);
+            res.push_back(opCodeArray[1]);
+            return res;
         }
         default: {
             res.clear();

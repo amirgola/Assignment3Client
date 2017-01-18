@@ -21,6 +21,7 @@ Protocol::Protocol(ConnectionHandler* connectionHandler): _connectionHandler(con
 
 void Protocol::process(Packet* message) {
     short opCode = message->getOpCode();
+    std::cout << "op code " <<opCode << std::endl;
     switch(opCode) {
         case enumNamespace::PacketType::ACK:
             // call ack process
@@ -56,7 +57,7 @@ void Protocol::process(Packet* message) {
                     dirqArr->push_back((char &&) ((DATApacket*)message)->getData().at(i));
                 }
 
-                ACKpacket* acKpacket = new ACKpacket( ((DATApacket*)message)->getBlockNumber());
+                ACKpacket* acKpacket = new ACKpacket(((DATApacket*)message)->getBlockNumber());
                 sendPacket(acKpacket);
                 delete acKpacket;
 
@@ -64,7 +65,8 @@ void Protocol::process(Packet* message) {
                     finishDownload = true;
                     enumNamespace::g_status = enumNamespace::PacketType::WAITING;
                     //we can add this to the Queue...
-                    printDirq(*dirqArr); // not sure if * is right here
+                    if(dirqArr != nullptr && dirqArr->size() > 0)
+                        printDirq(*dirqArr); // not sure if * is right here
                 }
             }
             break;
@@ -90,6 +92,7 @@ void Protocol::AckProcess(Packet* message){
         }
         case enumNamespace::PacketType::DISC:{
             // close socket
+            _connectionHandler->close();
             enumNamespace::g_status = enumNamespace::PacketType::WAITING;
         }
         default:
@@ -115,7 +118,7 @@ void Protocol::sendData(){
 void Protocol::sendPacket(Packet* packet){
     std::vector<char> encodedMessage = encDec.encode(packet);
     std::string toSend(encodedMessage.begin(), encodedMessage.end());
-    if (!_connectionHandler->sendLine(toSend)) {
+    if (!_connectionHandler->sendBytes(toSend.c_str(),toSend.length())) {
         std::cout << "Disconnected. Exiting...\n" << std::endl;
     }
 }

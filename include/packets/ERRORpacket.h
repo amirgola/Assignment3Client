@@ -5,8 +5,8 @@
 
 class ERRORpacket : public Packet{
 private:
-    short errCode;
-    std::string errMsg;
+    short _errCode;
+    std::string _errMsg;
 public:
     ERRORpacket(short errCode, std::string errMsg);
     short getErrCode();
