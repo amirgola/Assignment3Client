@@ -15,7 +15,7 @@ private:
     short pckSize;
     short blkNum;
     std::vector<char> *downloadArr;
-    std::vector<char> *dirqArr;
+    std::vector<char> dirqArr;
     std::vector<DATApacket*> *sendDataArr;
 
     std::vector<char> readFileBytes(const char *name);

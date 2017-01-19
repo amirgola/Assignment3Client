@@ -39,7 +39,6 @@ Packet* MessageEncoderDecoder::decodeNextByte(char nextByte) {
                 break;
             }
             case enumNamespace::PacketType::DATA: {
-
                 if (buffer.size() < 4) { // 0,1,2,3 position get filled in buffer
                     buffer.push_back(nextByte);
                     if (buffer.size() == 2) {

@@ -44,7 +44,7 @@ void KeyboardTask::operator()(){
 
 
         // connectionHandler.sendLine(line) appends '\n' to the message. Therefor we send len+1 bytes.
-        std::cout << "Sent " << 90 << " bytes to server" << std::endl;
+//        std::cout << "Sent " << 90 << " bytes to server" << std::endl;
     }
 
     boost::this_thread::yield(); //Gives up the remainder of the current thread's time slice, to allow other threads to run.

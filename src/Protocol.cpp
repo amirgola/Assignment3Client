@@ -24,7 +24,6 @@ void Protocol::process(Packet* message) {
     std::cout << "op code " <<opCode << std::endl;
     switch(opCode) {
         case enumNamespace::PacketType::ACK:
-            // call ack process
             AckProcess(message);
             std::cout << "ACK <" << ((ACKpacket *) message)->getBlockNumber() << ">" << std::endl;
             break;
@@ -54,20 +53,21 @@ void Protocol::process(Packet* message) {
 
             } else if(enumNamespace::g_status == enumNamespace::PacketType::DIRQ) {
                 for (int i = 0; i < ((DATApacket*)message)->getData().size(); ++i) {
-                    dirqArr->push_back((char &&) ((DATApacket*)message)->getData().at(i));
+                    dirqArr.push_back((char &&) ((DATApacket*)message)->getData().at(i));
+                }
+
+
+                if(((DATApacket*)message)->getData().size() < 512) { // we can assume we get the packets in the right order
+                    finishDownload = true;
+                    enumNamespace::g_status = enumNamespace::PacketType::WAITING;
+                    if(dirqArr.size() > 0) {
+                        printDirq(dirqArr);
+                    }
                 }
 
                 ACKpacket* acKpacket = new ACKpacket(((DATApacket*)message)->getBlockNumber());
                 sendPacket(acKpacket);
                 delete acKpacket;
-
-                if(((DATApacket*)message)->getData().size() < 512) { // we can assume we get the packets in the right order
-                    finishDownload = true;
-                    enumNamespace::g_status = enumNamespace::PacketType::WAITING;
-                    //we can add this to the Queue...
-                    if(dirqArr != nullptr && dirqArr->size() > 0)
-                        printDirq(*dirqArr); // not sure if * is right here
-                }
             }
             break;
     }

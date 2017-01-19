@@ -37,15 +37,10 @@ void SocketTask::operator()(){
         Packet* packet = nullptr;
 
         while(packet == nullptr) {
-            std::cout << "packet IS NULL " << std::endl;
             if(!_protocol->getConnectionHandler()->getBytes(message, 1)){
                 break;
             }
             packet = encDec.decodeNextByte(message[0]);
-            if(packet != nullptr)
-                std::cout << "packet opcode: " << packet->getOpCode() << std::endl;
-            else
-                std::cout << "packet IS still NULL " << std::endl;
         }
 
         if(packet != nullptr){
