@@ -25,39 +25,59 @@ void Protocol::process(Packet* message) {
     switch(opCode) {
         case enumNamespace::PacketType::ACK:
             AckProcess(message);
-            std::cout << "ACK <" << ((ACKpacket *) message)->getBlockNumber() << ">" << std::endl;
+            std::cout << "ACK " << ((ACKpacket *) message)->getBlockNumber() << std::endl;
             break;
-
         case enumNamespace::PacketType::BCAST:
-            std::cout << "BCAST <" << ((BCASTpacket*)message)->getDelAdd() <<"><" <<((BCASTpacket*)message)->getFileName() << std::endl;
+            std::cout << "BCAST " << ((BCASTpacket*)message)->getDelAdd() <<" " <<((BCASTpacket*)message)->getFileName() << std::endl;
             break;
-
         case enumNamespace::PacketType::ERROR:
-            std::cout << "ERROR <" << ((ERRORpacket*)message)->getErrCode() << ">" << std::endl;
+            std::cout << "ERROR " << ((ERRORpacket*)message)->getErrCode() << std::endl;
             break;
-
         case enumNamespace::PacketType::DATA:
+            DATApacket* dataPacket = ((DATApacket*)message);
+            downloadArr = new std::vector<char>();
             if(enumNamespace::g_status == enumNamespace::PacketType::RRQ) {
-                for (int i = 0; i < ((DATApacket*)message)->getData().size(); ++i) {
-                    downloadArr->push_back((char &&) ((DATApacket*)message)->getData().at(i));
+                for (int i = 0; i < ((DATApacket*)message)->getPacketSize(); ++i) {
+                    char dataByte = dataPacket->getData()[i];
+                    downloadArr->push_back(dataByte);
                 }
 
-                ACKpacket* acKpacket = new ACKpacket( ((DATApacket*)message)->getBlockNumber());
+                ACKpacket* acKpacket = new ACKpacket(dataPacket->getBlockNumber());
                 sendPacket(acKpacket);
                 delete acKpacket;
 
-                if(((DATApacket*)message)->getData().size() < 512) {
+                if(dataPacket->getPacketSize() < 512) {
+                    std::ofstream incomingFile;
+                    std::string filePath = "./" + enumNamespace::g_fileNameString;
+
+                    if (dataPacket->getBlockNumber() == 1) {
+                        incomingFile.open(filePath, std::ios::binary);
+                    }
+                    else {
+                        incomingFile.open(filePath, std::ios::app | std::ios::binary);
+                    }
+
+                    if (incomingFile.is_open()) {
+                        char* data = new char[dataPacket->getPacketSize()];
+                        std::copy(dataPacket->getData().begin(), dataPacket->getData().end(), data);
+
+                        incomingFile.write(data, dataPacket->getPacketSize());
+                        incomingFile.close();
+                    } else {
+                        std::cout << "File cannot be written" << enumNamespace::g_fileNameString << std::endl;
+                        sendPacket(new ERRORpacket(2, "File cannot be written"));
+                    }
+
                     enumNamespace::g_status = enumNamespace::PacketType::WAITING;
-                    std::cout << "RRQ <" << fileDownloadName << ">" << " complete" << std::endl;
+                    std::cout << "RRQ <" << enumNamespace::g_fileNameString << ">" << " complete" << std::endl;
                 }
 
             } else if(enumNamespace::g_status == enumNamespace::PacketType::DIRQ) {
-                for (int i = 0; i < ((DATApacket*)message)->getData().size(); ++i) {
-                    dirqArr.push_back((char &&) ((DATApacket*)message)->getData().at(i));
+                for (int i = 0; i < dataPacket->getPacketSize(); ++i) {
+                    dirqArr.push_back((char &&) dataPacket->getData().at(i));
                 }
 
-
-                if(((DATApacket*)message)->getData().size() < 512) { // we can assume we get the packets in the right order
+                if(dataPacket->getPacketSize() < 512) { // we can assume we get the packets in the right order
                     finishDownload = true;
                     enumNamespace::g_status = enumNamespace::PacketType::WAITING;
                     if(dirqArr.size() > 0) {
@@ -65,9 +85,10 @@ void Protocol::process(Packet* message) {
                     }
                 }
 
-                ACKpacket* acKpacket = new ACKpacket(((DATApacket*)message)->getBlockNumber());
+                ACKpacket* acKpacket = new ACKpacket(dataPacket->getBlockNumber());
                 sendPacket(acKpacket);
                 delete acKpacket;
+                delete dataPacket;
             }
             break;
     }
@@ -89,11 +110,13 @@ void Protocol::AckProcess(Packet* message){
             if( lastPckSent == ((ACKpacket *)message)->getBlockNumber() ) {
                 sendData();
             }
+            break;
         }
         case enumNamespace::PacketType::DISC:{
             // close socket
             _connectionHandler->close();
             enumNamespace::g_status = enumNamespace::PacketType::WAITING;
+            break;
         }
         default:
             break;
@@ -102,7 +125,7 @@ void Protocol::AckProcess(Packet* message){
 }
 
 void Protocol::sendData(){
-    if (sendDataArr->size() != 0) {
+    if (sendDataArr!= nullptr && sendDataArr->size() != 0) {
         lastPckSent = sendDataArr->front()->getBlockNumber();
 
         // encode the packet
@@ -137,8 +160,10 @@ void Protocol::splitFileIntoDataPackets(const char* fileName) {
     std::vector<char> a = readFileBytes(fileName);
     int blkNum = 1;
     std::vector<char> te;
+    if(sendDataArr == nullptr)
+        sendDataArr = new std::vector<DATApacket*>();
     for (int j = 0; j <a.size() ; ++j) {
-        if(te.size() <= 512) {
+        if(te.size() < 512) {
             te.push_back((char &&) a.at(j));
         } else {
             sendDataArr->push_back(new DATApacket(te.size(), blkNum, te));
@@ -167,5 +192,5 @@ ConnectionHandler* Protocol::getConnectionHandler(){
 }
 
 Protocol::~Protocol(){
-
+    delete downloadArr;
 }

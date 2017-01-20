@@ -34,7 +34,7 @@ Packet* MessageEncoderDecoder::decodeNextByte(char nextByte) {
                 } else {
                     strBuffer = std::string(buffer.begin(), buffer.end());
                     resetBuffer();
-                    return  new WRQpacket(strBuffer);
+                    return new WRQpacket(strBuffer);
                 }
                 break;
             }
@@ -42,12 +42,12 @@ Packet* MessageEncoderDecoder::decodeNextByte(char nextByte) {
                 if (buffer.size() < 4) { // 0,1,2,3 position get filled in buffer
                     buffer.push_back(nextByte);
                     if (buffer.size() == 2) {
-                        pckSize = bytesToShort(reinterpret_cast<char*>(buffer.data()));
+                        pckSize = bytesToShort(reinterpret_cast<char *>(buffer.data()));
                         dataArr = new std::vector<char>();
                     }
                     if (buffer.size() == 4) {
                         std::vector<char> newVector(buffer.begin() + 2, buffer.end());
-                        blkNum = bytesToShort(reinterpret_cast<char*>(newVector.data()));
+                        blkNum = bytesToShort(reinterpret_cast<char *>(newVector.data()));
                     }
                 } else {
                     dataArr->push_back(nextByte);
@@ -63,12 +63,12 @@ Packet* MessageEncoderDecoder::decodeNextByte(char nextByte) {
                 if (buffer.size() >= 2) {
                     std::vector<char> newVector(buffer);
                     resetBuffer();
-                    return new ACKpacket(bytesToShort(reinterpret_cast<char*>(newVector.data())));
+                    return new ACKpacket(bytesToShort(reinterpret_cast<char *>(newVector.data())));
                 }
                 break;
             }
             case enumNamespace::PacketType::ERROR: {
-                if(buffer.size() < 2 || nextByte != '\0')
+                if (buffer.size() < 2 || nextByte != '\0')
                     buffer.push_back(nextByte);
                 else {
                     short errorCode = errCode;
@@ -107,15 +107,13 @@ Packet* MessageEncoderDecoder::decodeNextByte(char nextByte) {
                 break;
             }
             case enumNamespace::PacketType::BCAST: {
-                if(buffer.size() == 0 || nextByte != '\0')
+                if (buffer.size() == 0 || nextByte != '\0')
                     buffer.push_back(nextByte);
                 else {
-                    if (buffer.size() > 1 && nextByte == '\0') {
-                        char delAdd = buffer.at(0);
-                        strBuffer = std::string(buffer.begin() + 1, buffer.end());
-                        resetBuffer();
-                        return new BCASTpacket(delAdd, strBuffer);
-                    }
+                    char delAdd = buffer.at(0);
+                    strBuffer = std::string(buffer.begin() + 1, buffer.end());
+                    resetBuffer();
+                    return new BCASTpacket(delAdd, strBuffer);
                 }
 
                 break;
@@ -152,7 +150,7 @@ std::vector<char> MessageEncoderDecoder::encode(Packet* message) {
         case enumNamespace::PacketType::DATA: {
 
             res.clear();
-            char *pctSizeArray;
+            char pctSizeArray[2];
             shortToBytes(message->getOpCode(), opCodeArray);
             DATApacket *packet = (DATApacket *) message;
             shortToBytes(packet->getPacketSize(), pctSizeArray);
@@ -196,14 +194,12 @@ std::vector<char> MessageEncoderDecoder::encode(Packet* message) {
         }
         case enumNamespace::PacketType::RRQ: {
             shortToBytes(message->getOpCode(), opCodeArray);
-            temp = std::vector<char>(((RRQpacket *) message)->getFileName().begin(),
-                                     ((RRQpacket *) message)->getFileName().end());
-
             res.push_back(opCodeArray[0]);
             res.push_back(opCodeArray[1]);
-            for (int i = 0; i < temp.size(); ++i) {
-                res.push_back((char &&) temp.at(i));
+            for(char& c : ((RRQpacket *) message)->getFileName()) {
+                res.push_back(c);
             }
+
             res.push_back(0);
 
             return res;
@@ -211,14 +207,13 @@ std::vector<char> MessageEncoderDecoder::encode(Packet* message) {
         case enumNamespace::PacketType::WRQ: {
 
             shortToBytes(message->getOpCode(), opCodeArray);
-            temp = std::vector<char>(((WRQpacket *) message)->getFileName().begin(),
-                                     ((WRQpacket *) message)->getFileName().end());
-
             res.push_back(opCodeArray[0]);
             res.push_back(opCodeArray[1]);
-            for (int i = 0; i < temp.size(); ++i) {
-                res.push_back((char &&) temp.at(i));
+
+            for(char& c : ((WRQpacket *) message)->getFileName()) {
+                res.push_back(c);
             }
+
             res.push_back(0);
 
             return res;

@@ -42,17 +42,11 @@ void KeyboardTask::operator()(){
             break;
         }
 
-
-        // connectionHandler.sendLine(line) appends '\n' to the message. Therefor we send len+1 bytes.
-//        std::cout << "Sent " << 90 << " bytes to server" << std::endl;
+        delete sendPacket;
     }
 
     boost::this_thread::yield(); //Gives up the remainder of the current thread's time slice, to allow other threads to run.
 }
-
-//
-// Created by Medhopz on 1/17/2017.
-//
 
 Packet* KeyboardTask::keyboardParsing (std::string str) {
     std::size_t found = str.find_first_of(' ');
