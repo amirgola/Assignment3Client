@@ -4,6 +4,7 @@ SRCS = 	KeyboardTask.cpp \
 	SocketTask.cpp \
 	MessageEncoderDecoder.cpp \
 	connectionHandler.cpp \
+	echoClient.cpp \
 	ACKpacket.cpp \
 	BCASTpacket.cpp \
 	DATApacket.cpp \
