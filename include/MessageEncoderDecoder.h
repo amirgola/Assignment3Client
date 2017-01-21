@@ -27,6 +27,8 @@ public:
     std::vector<char> encode(Packet* message);
     short decodePacketType(char bytes[]);
     ~MessageEncoderDecoder();
+    MessageEncoderDecoder& operator=(const MessageEncoderDecoder& other);
+    MessageEncoderDecoder(const MessageEncoderDecoder& other);
 };
 
 #endif

@@ -272,3 +272,23 @@ void MessageEncoderDecoder::resetBuffer(){
 MessageEncoderDecoder::~MessageEncoderDecoder(){
     delete dataArr;
 }
+
+MessageEncoderDecoder& MessageEncoderDecoder::operator=(const MessageEncoderDecoder& other){
+    if(this!= &other){
+        delete dataArr;
+
+        opCode = other.opCode;
+        strBuffer = other.strBuffer;
+        buffer = other.buffer;
+        pckSize = other.pckSize;
+        blkNum = other.blkNum;
+        dataArr = other.dataArr;
+        errCode = other.errCode;
+    }
+    return *this;
+}
+
+MessageEncoderDecoder::MessageEncoderDecoder(const MessageEncoderDecoder& other):opCode(other.opCode),
+             strBuffer(other.strBuffer),buffer(other.buffer), pckSize(other.pckSize), blkNum(other.blkNum),
+             dataArr(other.dataArr), errCode(other.errCode){
+}
