@@ -13,6 +13,9 @@
 #include "../include/DIRQpacket.h"
 #include "../include/Packet.h"
 
+MessageEncoderDecoder::MessageEncoderDecoder():opCode(0),strBuffer(""),buffer(), pckSize(0), blkNum(-1), dataArr(), errCode(-1){
+
+}
 
 Packet* MessageEncoderDecoder::decodeNextByte(char nextByte) {
     // if we have two bytes - then we can decode the rest of the message
