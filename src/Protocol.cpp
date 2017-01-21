@@ -15,6 +15,7 @@
 #include <fstream>
 #include <math.h>
 
+
 Protocol::Protocol(ConnectionHandler* connectionHandler):dirqArr(), sendDataArr(), finishDownload(false),
          fileDownloadName(""),fileUploadName(""),lastPckSent(0), _connectionHandler(connectionHandler), encDec(){
 }

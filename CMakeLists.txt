@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 11)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Weffc++ -std=c++11 ")
 
-find_package(Boost 1.63.0 COMPONENTS system filesystem thread REQUIRED)
+find_package(Boost 1.58.0 COMPONENTS system filesystem thread REQUIRED)
 
 include_directories(SYSTEM ${Boost_INCLUDE_DIRS})
 

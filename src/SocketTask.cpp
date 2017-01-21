@@ -10,6 +10,7 @@
 #include "./../include/enums.h"
 #include "../include/ERRORpacket.h"
 
+
 SocketTask::SocketTask(Protocol* protocol) : _protocol(protocol){}
 
 void SocketTask::operator()(){
