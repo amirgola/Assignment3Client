@@ -73,6 +73,7 @@ void Protocol::process(Packet* message) {
                 }
 
             } else if(enumNamespace::g_status == enumNamespace::PacketType::DIRQ) {
+                dirqArr.clear();
                 for (int i = 0; i < dataPacket->getPacketSize(); ++i) {
                     dirqArr.push_back((char &&) dataPacket->getData().at(i));
                 }
@@ -168,6 +169,7 @@ void Protocol::splitFileIntoDataPackets(const char* fileName) {
         } else {
             sendDataArr->push_back(new DATApacket(te.size(), blkNum, te));
             te.clear();
+            te.push_back((char &&) a.at(j));
             blkNum++;
         }
     }

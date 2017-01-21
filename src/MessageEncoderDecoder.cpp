@@ -267,5 +267,5 @@ void MessageEncoderDecoder::resetBuffer(){
 }
 
 MessageEncoderDecoder::~MessageEncoderDecoder(){
-
+    delete dataArr;
 }
