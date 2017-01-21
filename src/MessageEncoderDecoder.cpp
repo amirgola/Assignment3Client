@@ -55,7 +55,7 @@ Packet* MessageEncoderDecoder::decodeNextByte(char nextByte) {
                 } else {
                     dataArr->push_back(nextByte);
                 }
-                if (buffer.size() >= 4 && dataArr->size() == pckSize) {
+                if (buffer.size() >= 4 && dataArr->size() == (unsigned)pckSize) {
                     resetBuffer();
                     return new DATApacket(pckSize, blkNum, *dataArr);
                 }
@@ -167,7 +167,7 @@ std::vector<char> MessageEncoderDecoder::encode(Packet* message) {
             res.push_back(blkNumArray[0]);
             res.push_back(blkNumArray[1]);
 
-            for (int i = 0; i < temp.size(); i++) {
+            for (int i = 0; (unsigned)i < temp.size(); i++) {
                 res.push_back(temp[i]);
             }
 
