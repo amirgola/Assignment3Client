@@ -34,6 +34,8 @@ public:
     void sendPacket(Packet* packet);
     ConnectionHandler* getConnectionHandler();
     ~Protocol();
+    Protocol& operator=(const Protocol& other);
+    Protocol(const Protocol& other);
 };
 
 #endif //BOOST_ECHO_CLIENT_PROTOCOL_H

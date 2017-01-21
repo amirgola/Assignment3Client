@@ -23,7 +23,6 @@ void SocketTask::operator()(){
         // decode
         MessageEncoderDecoder encDec = MessageEncoderDecoder();
         short type = encDec.decodePacketType(bytes);
-        std::cout << "type " <<type << std::endl;
         char message[1];
         Packet* packet = nullptr;
 

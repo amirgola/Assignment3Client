@@ -21,7 +21,6 @@ Protocol::Protocol(ConnectionHandler* connectionHandler): _connectionHandler(con
 
 void Protocol::process(Packet* message) {
     short opCode = message->getOpCode();
-    std::cout << "op code " << opCode << std::endl;
     switch (opCode) {
         case enumNamespace::PacketType::ACK:
             AckProcess(message);
@@ -191,6 +190,45 @@ ConnectionHandler* Protocol::getConnectionHandler(){
 }
 
 Protocol::~Protocol(){
+    for(DATApacket* packet : *sendDataArr){
+        delete packet;
+    }
+
     delete sendDataArr;
-    delete _connectionHandler;
+}
+
+Protocol& Protocol::operator=(const Protocol& other){
+    if(this!= &other){
+        for(DATApacket* packet : *sendDataArr){
+            delete packet;
+        }
+
+        delete sendDataArr;
+
+        dirqArr = other.dirqArr;
+        finishDownload = other.finishDownload;
+        fileDownloadName = other.fileDownloadName;
+        fileUploadName = other.fileUploadName;
+        lastPckSent = other.lastPckSent;
+        _connectionHandler = other._connectionHandler;
+
+        sendDataArr = other.sendDataArr;
+        for(DATApacket* packet : *other.sendDataArr){
+            sendDataArr->push_back(packet);
+        }
+    }
+
+}
+
+Protocol::Protocol(const Protocol& other):_connectionHandler(other._connectionHandler){
+        dirqArr = other.dirqArr;
+        finishDownload = other.finishDownload;
+        fileDownloadName = other.fileDownloadName;
+        fileUploadName = other.fileUploadName;
+        lastPckSent = other.lastPckSent;
+        sendDataArr = other.sendDataArr;
+        for(DATApacket* packet : *other.sendDataArr){
+            sendDataArr->push_back(packet);
+        }
+
 }
