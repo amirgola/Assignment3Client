@@ -23,7 +23,7 @@
 KeyboardTask::KeyboardTask(Protocol* protocol) : _protocol(protocol){}
 
 void KeyboardTask::operator()(){
-    while(enumNamespace::g_status != enumNamespace::PacketType::DISCONNECTED){ //while connected? use lock?
+    while(enumNamespace::g_status != enumNamespace::PacketType::DISCONNECTED && enumNamespace::g_status != enumNamespace::PacketType::DISC){ //while connected? use lock?
         // get input
         const short bufsize = 512;
         char buf[bufsize];
@@ -68,7 +68,7 @@ Packet* KeyboardTask::keyboardParsing (std::string str) {
         enumNamespace::g_status = enumNamespace::PacketType::WRQ;
         return new WRQpacket(fileName);
     }
-    if(command == "LOGRQ") {
+    if(command == "LOGRQ" && enumNamespace::g_status == enumNamespace::PacketType::STARTED) {
         enumNamespace::g_status = enumNamespace::PacketType::LOGRQ;
         return new LOGRQpacket(fileName);
     }
