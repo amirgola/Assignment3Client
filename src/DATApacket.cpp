@@ -5,7 +5,8 @@
 // Created by Medhopz on 1/16/2017.
 //
 
-DATApacket::DATApacket(short packetSize, short blockNumber, std::vector<char> data):Packet::Packet(3) {
+DATApacket::DATApacket(short packetSize, short blockNumber, std::vector<char> data):Packet::Packet(3),
+                            packetSize_(packetSize),blockNumber_(blockNumber), data_(data){
     packetSize_ = packetSize;
     blockNumber_ = blockNumber;
     data_ = data;

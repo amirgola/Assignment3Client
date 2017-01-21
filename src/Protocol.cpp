@@ -15,8 +15,7 @@
 #include <fstream>
 #include <math.h>
 
-Protocol::Protocol(ConnectionHandler* connectionHandler): _connectionHandler(connectionHandler){
-    encDec = MessageEncoderDecoder();
+Protocol::Protocol(ConnectionHandler* connectionHandler): _connectionHandler(connectionHandler), encDec(){
 }
 
 void Protocol::process(Packet* message) {

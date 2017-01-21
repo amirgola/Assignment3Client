@@ -4,8 +4,7 @@
 // Created by Medhopz on 1/16/2017.
 //
 
-RRQpacket::RRQpacket(std::string fileName):Packet::Packet(1) {
-    fileName_ = fileName;
+RRQpacket::RRQpacket(std::string fileName):Packet::Packet(1), fileName_(fileName) {
 }
 
 std::string RRQpacket::getFileName() {

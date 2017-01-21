@@ -4,8 +4,7 @@
 // Created by Medhopz on 1/16/2017.
 //
 
-LOGRQpacket::LOGRQpacket(std::string userName):Packet::Packet(7) {
-    userName_ = userName;
+LOGRQpacket::LOGRQpacket(std::string userName):Packet::Packet(7),userName_(userName) {
 }
 
 std::string LOGRQpacket::getUserName() {
