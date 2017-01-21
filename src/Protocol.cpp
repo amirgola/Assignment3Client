@@ -217,7 +217,7 @@ Protocol& Protocol::operator=(const Protocol& other){
             sendDataArr->push_back(packet);
         }
     }
-
+    return *this;
 }
 
 Protocol::Protocol(const Protocol& other):_connectionHandler(other._connectionHandler){
