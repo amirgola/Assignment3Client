@@ -25,7 +25,7 @@ KeyboardTask::KeyboardTask(int* pendingTasks, boost::mutex* mutex,
         : _pendingTasks(pendingTasks), _mutex(mutex), _protocol(protocol){}
 
 void KeyboardTask::operator()(){
-    while(enumNamespace::g_status != enumNamespace::PacketType::DISCONNECTED;){ //while connected? use lock?
+    while(enumNamespace::g_status != enumNamespace::PacketType::DISCONNECTED){ //while connected? use lock?
         // get input
         const short bufsize = 512;
         char buf[bufsize];

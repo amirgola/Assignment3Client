@@ -15,7 +15,7 @@ SocketTask::SocketTask(int* pendingTasks, boost::mutex* mutex,
         : _pendingTasks(pendingTasks), _mutex(mutex), _protocol(protocol){}
 
 void SocketTask::operator()(){
-    while(enumNamespace::g_status != enumNamespace::PacketType::DISCONNECTED;){ //while connected? use lock?
+    while(enumNamespace::g_status != enumNamespace::PacketType::DISCONNECTED){ //while connected? use lock?
         // get bytes
 
         // We can use one of three options to read data from the server:
