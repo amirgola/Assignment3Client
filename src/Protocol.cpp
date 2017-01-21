@@ -116,7 +116,7 @@ void Protocol::AckProcess(Packet* message){
         case enumNamespace::PacketType::DISC:{
             // close socket
             _connectionHandler->close();
-            enumNamespace::g_status = enumNamespace::PacketType::WAITING;
+            enumNamespace::g_status = enumNamespace::PacketType::DISCONNECTED;
             break;
         }
         default:
@@ -143,7 +143,7 @@ void Protocol::sendPacket(Packet* packet){
     std::vector<char> encodedMessage = encDec.encode(packet);
     std::string toSend(encodedMessage.begin(), encodedMessage.end());
     if (!_connectionHandler->sendBytes(toSend.c_str(),toSend.length())) {
-        std::cout << "Disconnected. Exiting...\n" << std::endl;
+        enumNamespace::g_status = enumNamespace::PacketType::DISCONNECTED;
     }
 }
 

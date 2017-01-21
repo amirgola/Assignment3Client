@@ -13,7 +13,8 @@ namespace enumNamespace{
         BCAST,
         DISC,
         UNKNOWN,
-        WAITING
+        WAITING,
+        DISCONNECTED
     };
     extern enumNamespace::PacketType g_status;
     extern std::string g_fileNameString;

@@ -25,7 +25,7 @@ KeyboardTask::KeyboardTask(int* pendingTasks, boost::mutex* mutex,
         : _pendingTasks(pendingTasks), _mutex(mutex), _protocol(protocol){}
 
 void KeyboardTask::operator()(){
-    while(true){ //while connected? use lock?
+    while(enumNamespace::g_status != enumNamespace::PacketType::DISCONNECTED;){ //while connected? use lock?
         // get input
         const short bufsize = 512;
         char buf[bufsize];
@@ -39,7 +39,7 @@ void KeyboardTask::operator()(){
         std::string toSend(encodedMessage.begin(), encodedMessage.end());
 
         if(!_protocol->getConnectionHandler()->sendBytes(toSend.c_str(),toSend.length())){
-            break;
+            enumNamespace::g_status = enumNamespace::PacketType::DISCONNECTED;
         }
 
         delete sendPacket;
