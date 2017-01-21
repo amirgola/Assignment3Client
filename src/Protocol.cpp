@@ -15,7 +15,8 @@
 #include <fstream>
 #include <math.h>
 
-Protocol::Protocol(ConnectionHandler* connectionHandler): _connectionHandler(connectionHandler), encDec(){
+Protocol::Protocol(ConnectionHandler* connectionHandler):dirqArr(), sendDataArr(), finishDownload(false),
+         fileDownloadName(""),fileUploadName(""),lastPckSent(0), _connectionHandler(connectionHandler), encDec(){
 }
 
 void Protocol::process(Packet* message) {
@@ -143,7 +144,7 @@ void Protocol::sendPacket(Packet* packet){
 }
 
 void Protocol::printDirq(std::vector<char> arr) {
-    for (int i = 0; i < arr.size() ; ++i) {
+    for (int i = 0; (unsigned)i < arr.size() ; ++i) {
         if(arr.at(i) != '\0') {
             std::cout << arr.at(i);
         } else {
@@ -158,7 +159,7 @@ void Protocol::splitFileIntoDataPackets(const char* fileName) {
     std::vector<char> te;
     if(sendDataArr == nullptr)
         sendDataArr = new std::vector<DATApacket*>();
-    for (int j = 0; j <a.size() ; ++j) {
+    for (int j = 0; (unsigned)j <a.size() ; ++j) {
         if(te.size() < 512) {
             te.push_back((char &&) a.at(j));
         } else {
@@ -219,15 +220,11 @@ Protocol& Protocol::operator=(const Protocol& other){
     return *this;
 }
 
-Protocol::Protocol(const Protocol& other):_connectionHandler(other._connectionHandler){
-        dirqArr = other.dirqArr;
-        finishDownload = other.finishDownload;
-        fileDownloadName = other.fileDownloadName;
-        fileUploadName = other.fileUploadName;
-        lastPckSent = other.lastPckSent;
-        sendDataArr = other.sendDataArr;
+Protocol::Protocol(const Protocol& other):dirqArr(other.dirqArr), sendDataArr(other.sendDataArr), finishDownload(other.finishDownload),
+        fileDownloadName(other.fileDownloadName),fileUploadName(other.fileUploadName),lastPckSent(other.lastPckSent),
+          _connectionHandler(other._connectionHandler), encDec(){
+
         for(DATApacket* packet : *other.sendDataArr){
             sendDataArr->push_back(packet);
         }
-
 }
