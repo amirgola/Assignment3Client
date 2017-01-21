@@ -1,4 +1,4 @@
-#include "./../../include/packets/Packet.h"
+#include "../include/Packet.h"
 
 short Packet::getOpCode(){
     return opCode_;

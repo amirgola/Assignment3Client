@@ -1,5 +1,5 @@
-#include "./../../include/packets/WRQpacket.h"
-#include "./../../include/packets/Packet.h"
+#include "../include/WRQpacket.h"
+#include "../include/Packet.h"
 //
 // Created by Medhopz on 1/16/2017.
 //

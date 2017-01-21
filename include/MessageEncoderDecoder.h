@@ -1,7 +1,7 @@
 #ifndef MESSAGEENCODERDECODER_H_
 #define MESSAGEENCODERDECODER_H_
 
-#include "./packets/Packet.h"
+#include "Packet.h"
 #include <vector>
 #include <string>
 #include <sstream>

@@ -5,7 +5,7 @@
 #ifndef BOOST_ECHO_CLIENT_PROTOCOL_H
 #define BOOST_ECHO_CLIENT_PROTOCOL_H
 
-#include "./packets/DATApacket.h"
+#include "DATApacket.h"
 #include "./../include/MessageEncoderDecoder.h"
 #include "./../include/connectionHandler.h"
 

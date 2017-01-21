@@ -1,17 +1,44 @@
-CFLAGS:=-c -Wall -Weffc++ -g -std=c++11 -Iinclude
-LDFLAGS:=-lboost_system -lboost_locale
+PROGRAM = TFTPclient
 
-all: EchoClient
-	g++ -o bin/echoExample bin/connectionHandler.o bin/echoClient.o $(LDFLAGS) 
+SRCS = 	KeyboardTask.cpp \
+	SocketTask.cpp \
+	MessageEncoderDecoder.cpp \
+	connectionHandler.cpp \
+	ACKpacket.cpp \
+	BCASTpacket.cpp \
+	DATApacket.cpp \
+	DELRQpacket.cpp \
+	DIRQpacket.cpp \
+	DISCpacket.cpp \
+	ERRORpacket.cpp \
+	LOGRQpacket.cpp \
+	Packet.cpp \
+	RRQpacket.cpp \
+	WRQpacket.cpp \
+	Protocol.cpp \
 
-EchoClient: bin/connectionHandler.o bin/echoClient.o
-	
-bin/connectionHandler.o: src/connectionHandler.cpp
-	g++ $(CFLAGS) -o bin/connectionHandler.o src/connectionHandler.cpp
+SRCDIR = src
+BINDIR = bin
 
-bin/echoClient.o: src/echoClient.cpp
-	g++ $(CFLAGS) -o bin/echoClient.o src/echoClient.cpp
-	
+OBJS = $(SRCS:%.cpp=$(BINDIR)/%.o)
+
+CC = g++
+
+CFLAGS = -g -std=c++11 -Wall -Weffc++ -Werror
+LFLAGS = -L/usr/lib
+
+INCLUDES = -I./include -isystem /usr/include
+LIBS = -lboost_locale -lboost_system -lboost_thread
+
+.PHONY: all
+all: $(PROGRAM)
+
+$(PROGRAM): $(OBJS)
+	$(CC) $(LFLAGS) -o $(BINDIR)/$(PROGRAM) $+ $(LIBS)
+
+$(BINDIR)/%.o: $(SRCDIR)/%.cpp
+	$(CC) -c $(CFLAGS) $(INCLUDES) -o $@ $<
+
 .PHONY: clean
 clean:
-	rm -f bin/*
+	rm -rf $(BINDIR)/*

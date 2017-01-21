@@ -6,19 +6,19 @@
 #include <string>
 #include <iostream>
 #include <boost/thread.hpp>
-#include "../include/packets/Packet.h"
+#include "../include/Packet.h"
 #include "./../include/Protocol.h"
 #include "./../include/enums.h"
-#include "./../include/packets/RRQpacket.h"
-#include "./../include/packets/WRQpacket.h"
-#include "./../include/packets/DATApacket.h"
-#include "./../include/packets/ACKpacket.h"
-#include "./../include/packets/ERRORpacket.h"
-#include "./../include/packets/DISCpacket.h"
-#include "./../include/packets/BCASTpacket.h"
-#include "./../include/packets/DELRQpacket.h"
-#include "./../include/packets/LOGRQpacket.h"
-#include "./../include/packets/DIRQpacket.h"
+#include "../include/RRQpacket.h"
+#include "../include/WRQpacket.h"
+#include "../include/DATApacket.h"
+#include "../include/ACKpacket.h"
+#include "../include/ERRORpacket.h"
+#include "../include/DISCpacket.h"
+#include "../include/BCASTpacket.h"
+#include "../include/DELRQpacket.h"
+#include "../include/LOGRQpacket.h"
+#include "../include/DIRQpacket.h"
 
 KeyboardTask::KeyboardTask(Protocol* protocol) : _protocol(protocol){}
 

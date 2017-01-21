@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include "./../include/connectionHandler.h"
 #include <iostream>
-#include "../include/packets/Packet.h"
+#include "../include/Packet.h"
 #include "./../include/KeyboardTask.h"
 #include "./../include/SocketTask.h"
 #include "./../include/enums.h"

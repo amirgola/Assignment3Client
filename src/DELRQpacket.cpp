@@ -1,5 +1,5 @@
-#include "./../../include/packets/DELRQpacket.h"
-#include "./../../include/packets/Packet.h"
+#include "../include/DELRQpacket.h"
+#include "../include/Packet.h"
 //
 // Created by Medhopz on 1/16/2017.
 //

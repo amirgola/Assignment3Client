@@ -5,10 +5,10 @@
 #include "../include/SocketTask.h"
 #include <iostream>
 #include <boost/thread.hpp>
-#include "../include/packets/Packet.h"
+#include "../include/Packet.h"
 #include "./../include/Protocol.h"
 #include "./../include/enums.h"
-#include "./../include/packets/ERRORpacket.h"
+#include "../include/ERRORpacket.h"
 
 SocketTask::SocketTask(Protocol* protocol) : _protocol(protocol){}
 

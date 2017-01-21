@@ -13,31 +13,31 @@ set(SOURCE_FILES
         include/connectionHandler.h
         include/enums.h
         include/MessageEncoderDecoder.h
-        include/packets/ACKpacket.h
-        include/packets/BCASTpacket.h
-        include/packets/DATApacket.h
-        include/packets/DELRQpacket.h
-        include/packets/DIRQpacket.h
-        include/packets/DISCpacket.h
-        include/packets/ERRORpacket.h
-        include/packets/LOGRQpacket.h
-        include/packets/Packet.h
-        include/packets/RRQpacket.h
-        include/packets/WRQpacket.h
+        include/ACKpacket.h
+        include/BCASTpacket.h
+        include/DATApacket.h
+        include/DELRQpacket.h
+        include/DIRQpacket.h
+        include/DISCpacket.h
+        include/ERRORpacket.h
+        include/LOGRQpacket.h
+        include/Packet.h
+        include/RRQpacket.h
+        include/WRQpacket.h
         include/KeyboardTask.h
         include/SocketTask.h
         include/Protocol.h
-        src/packets/ACKpacket.cpp
-        src/packets/BCASTpacket.cpp
-        src/packets/DATApacket.cpp
-        src/packets/DELRQpacket.cpp
-        src/packets/DIRQpacket.cpp
-        src/packets/DISCpacket.cpp
-        src/packets/ERRORpacket.cpp
-        src/packets/LOGRQpacket.cpp
-        src/packets/Packet.cpp
-        src/packets/RRQpacket.cpp
-        src/packets/WRQpacket.cpp
+        src/ACKpacket.cpp
+        src/BCASTpacket.cpp
+        src/DATApacket.cpp
+        src/DELRQpacket.cpp
+        src/DIRQpacket.cpp
+        src/DISCpacket.cpp
+        src/ERRORpacket.cpp
+        src/LOGRQpacket.cpp
+        src/Packet.cpp
+        src/RRQpacket.cpp
+        src/WRQpacket.cpp
         src/Protocol.cpp
         src/connectionHandler.cpp
         src/KeyboardTask.cpp

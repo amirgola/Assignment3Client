@@ -1,5 +1,5 @@
-#include "./../../include/packets/BCASTpacket.h"
-#include "./../../include/packets/Packet.h"
+#include "../include/BCASTpacket.h"
+#include "../include/Packet.h"
 //
 // Created by Medhopz on 1/16/2017.
 //

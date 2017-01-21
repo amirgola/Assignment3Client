@@ -1,5 +1,5 @@
-#include "./../../include/packets/DATApacket.h"
-#include "./../../include/packets/Packet.h"
+#include "../include/DATApacket.h"
+#include "../include/Packet.h"
 
 //
 // Created by Medhopz on 1/16/2017.
