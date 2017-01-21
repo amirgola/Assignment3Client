@@ -9,11 +9,9 @@
 
 class KeyboardTask {
 private:
-    int* _pendingTasks;
-    boost::mutex * _mutex;
     Protocol* _protocol;
 public:
-    KeyboardTask(int* pendingTasks, boost::mutex* mutex, Protocol* protocol);
+    KeyboardTask(Protocol* protocol);
     void operator()();
     Packet* keyboardParsing (std::string str);
 };

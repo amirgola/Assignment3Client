@@ -28,7 +28,11 @@ void Protocol::process(Packet* message) {
             std::cout << "ACK " << ((ACKpacket *) message)->getBlockNumber() << std::endl;
             break;
         case enumNamespace::PacketType::BCAST:
-            std::cout << "BCAST " << ((BCASTpacket*)message)->getDelAdd() <<" " <<((BCASTpacket*)message)->getFileName() << std::endl;
+            if(((BCASTpacket*)message)->getDelAdd() == 1) {
+                std::cout << "BCAST add " <<((BCASTpacket*)message)->getFileName() << std::endl;
+            } else {
+                std::cout << "BCAST del " <<((BCASTpacket*)message)->getFileName() << std::endl;
+            }
             break;
         case enumNamespace::PacketType::ERROR:
             std::cout << "ERROR " << ((ERRORpacket*)message)->getErrCode() << std::endl;
@@ -195,4 +199,6 @@ ConnectionHandler* Protocol::getConnectionHandler(){
 
 Protocol::~Protocol(){
     delete downloadArr;
+    delete sendDataArr;
+    delete _connectionHandler;
 }

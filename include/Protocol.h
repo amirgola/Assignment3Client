@@ -12,8 +12,6 @@
 class Protocol {
 private:
     //for data packet
-    short pckSize;
-    short blkNum;
     std::vector<char> *downloadArr;
     std::vector<char> dirqArr;
     std::vector<DATApacket*> *sendDataArr;

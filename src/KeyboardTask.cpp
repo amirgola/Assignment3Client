@@ -20,9 +20,7 @@
 #include "./../include/packets/LOGRQpacket.h"
 #include "./../include/packets/DIRQpacket.h"
 
-KeyboardTask::KeyboardTask(int* pendingTasks, boost::mutex* mutex,
-                           Protocol* protocol)
-        : _pendingTasks(pendingTasks), _mutex(mutex), _protocol(protocol){}
+KeyboardTask::KeyboardTask(Protocol* protocol) : _protocol(protocol){}
 
 void KeyboardTask::operator()(){
     while(enumNamespace::g_status != enumNamespace::PacketType::DISCONNECTED){ //while connected? use lock?
@@ -31,7 +29,6 @@ void KeyboardTask::operator()(){
         char buf[bufsize];
         std::cin.getline(buf, bufsize);
         std::string line(buf);
-        int len=line.length();
 
         Packet* sendPacket = keyboardParsing(buf);
         MessageEncoderDecoder encDec = MessageEncoderDecoder();

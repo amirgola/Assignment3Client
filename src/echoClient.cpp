@@ -27,11 +27,9 @@ int main (int argc, char *argv[]) {
     }
 
     Protocol protocol(&connectionHandler);
-    int pendingAcks = 0;
-    boost::mutex mutex;
 
-    KeyboardTask keyboardTask(&pendingAcks, &mutex, &protocol);
-    SocketTask socketTask(&pendingAcks, &mutex, &protocol);
+    KeyboardTask keyboardTask(&protocol);
+    SocketTask socketTask(&protocol);
 
     boost::thread th1(keyboardTask);
     boost::thread th2(socketTask);

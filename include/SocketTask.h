@@ -9,11 +9,9 @@
 
 class SocketTask {
 private:
-    int* _pendingTasks;
-    boost::mutex * _mutex;
     Protocol* _protocol;
 public:
-    SocketTask(int* pendingTasks, boost::mutex* mutex, Protocol* protocol);
+    SocketTask(Protocol* protocol);
     void operator()();
 };
 
