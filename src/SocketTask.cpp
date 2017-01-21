@@ -22,6 +22,7 @@ void SocketTask::operator()(){
         }
         // decode
         MessageEncoderDecoder encDec = MessageEncoderDecoder();
+        encDec.decodePacketType(bytes);
         char message[1];
         Packet* packet = nullptr;
 

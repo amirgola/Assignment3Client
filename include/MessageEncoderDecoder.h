@@ -21,8 +21,8 @@ private:
     void shortToBytes(short num, char* bytesArr);
     short bytesToShort(char* bytesArr);
     void resetBuffer();
-    MessageEncoderDecoder();
 public:
+    MessageEncoderDecoder();
     Packet* decodeNextByte(char nextByte);
     std::vector<char> encode(Packet* message);
     short decodePacketType(char bytes[]);
