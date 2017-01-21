@@ -50,10 +50,10 @@ void Protocol::process(Packet* message) {
                 }
 
                 if (incomingFile.is_open()) {
-                    char *data = new char[dataPacket->getPacketSize()];
-                    data = dataPacket->getData().data();
+                    std::vector<char> dataVector = dataPacket->getData();
+                    std::string strData(dataVector.begin(), dataVector.end());
 
-                    incomingFile.write(data, dataPacket->getPacketSize());
+                    incomingFile.write(strData.c_str(), dataPacket->getPacketSize());
                     incomingFile.close();
                 } else {
                     std::cout << "File cannot be written" << enumNamespace::g_fileNameString << std::endl;
